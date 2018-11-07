@@ -1,0 +1,63 @@
+{% raw -%}
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+	{% if filter %}
+	<div class="mb-2">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="btn-group float-right">
+					<button
+						id="filter-collapse"
+						type="button"
+					  	data-toggle="collapse"
+						data-target="#table-filters"
+						aria-expanded="true"
+						aria-controls="table-filters"
+						class="btn btn-primary">
+						
+						<span>Hide</span>
+						<img class="invert" src="{% static 'feather/search.svg' %}"></img>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div
+				id="table-filters"
+				class="col-lg-12 collapse show">
+			    <form method="get">
+			    	<div class="form-group">
+						{% crispy filter.form 'bootstrap4' %}
+
+						<div class="btn-group float-right">
+							<button
+								type="button"
+								id="clear"
+								name="clear"
+								class="btn btn-info">
+								Clear
+							</button>
+							<button
+								type="submit"
+								id="filter"
+								name="filter"
+								class="btn btn-primary">
+								Filter
+							</button>
+						</div>
+					</div>
+			    </form>
+		    </div>
+	   </div>
+    </div>
+	{% endif %}
+
+	{% render_table table 'django_tables2/bootstrap4.html' %}
+
+	<script type="module" src="{% static 'js/table.js' %}"></script>
+{% endblock content %}
+{%- endraw %}

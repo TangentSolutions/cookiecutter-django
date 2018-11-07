@@ -1,0 +1,42 @@
+{% if cookiecutter.use_sass_preprocessor == 'y' -%}
+// Your variable overrides
+$mirage: #1C2532;
+$portage:#AB7EF6;
+$azure-radiance:#0194EF;
+$dodger-blue:#2EA2F9;
+$java: #26C2C9;
+$apple:#4FCF3F;
+$malachite:#1BB934;
+$crimson:#E1112C;
+$cinnabar:#E54124;
+$sunglow:#FFC02A;
+$sun:#FFB610;
+$barley-white:#FFF5CD;
+$athens-gray:#FAFBFC;
+$white:#FFFFFF;
+$regent-st-blue:#A9C7DF;
+$nepal:#8EACC5;
+$oxford-blue:#323E4F;
+$ebony-clay:#232D3D;
+$ebony-clay-2:#283243;
+$mirage:#1C2532;
+$woodsmoke:#18191A;
+$black:#000000;
+
+// $body-bg: $mirage;
+// $body-color: $athens-gray;
+
+$body-bg: $athens-gray;
+$body-color: $woodsmoke;
+
+$theme-colors: (
+	"primary": $azure-radiance,
+	"secondary": $nepal,
+	"success": $apple,
+	"info": $regent-st-blue,
+	"warning": $sunglow,
+	"danger": $crimson,
+	"light": $white,
+	"dark": $mirage,
+);
+{%- endif %}

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rm -f './celerybeat.pid'
+celery -A {{cookiecutter.project_slug}}.taskapp beat -l INFO

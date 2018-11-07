@@ -1,0 +1,9 @@
+{%- if cookiecutter.use_sass_preprocessor == 'y' %}
+@import "custom_vars"; 
+@import "node_modules/bootstrap/scss/bootstrap";
+{%- endif %}
+
+img.invert {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
