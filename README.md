@@ -25,6 +25,14 @@ $ docker-compose -f local.yml up --build
 
 The project includes a small demo of the libraries it bundles. Once running open your browser on [localhost:8000](http://localhost:8000) and create an account. The mail hog server can be accessed on [localhost:8025](http://localhost:8025/) when you need to retrieve the confirmation email.
 
+## Optional
+
+Optionally you can load some fixtures for the demo.
+
+```bash
+$ docker-compose -f local.yml run --rm django python manage.py loaddata fixtures.json
+```
+
 TODO:
 
 - Add django channels support
