@@ -14,6 +14,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
+    template_name = 'users/user_detail.html'
 
 
 class UserListView(LoginRequiredMixin, ListView):
@@ -22,6 +23,7 @@ class UserListView(LoginRequiredMixin, ListView):
     model = User
     slug_field = 'username'
     slug_url_kwarg = 'username'
+    template_name = 'users/user_list.html'
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -29,9 +31,10 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
 
     model = User
     fields = ['name']
+    template_name = 'users/user_form.html'
 
     def get_success_url(self):
-        return reverse('users:detail', kwargs={'username': self.request.user.username})
+        return reverse('accounts:user-detail')
 
     def get_object(self):
         return User.objects.get(username=self.request.user.username)
@@ -43,7 +46,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse('users:detail', kwargs={'username': self.request.user.username})
+        return reverse('showcase:demo')
 
 
 # View functions

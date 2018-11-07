@@ -1,0 +1,61 @@
+{% raw -%}
+{% load static %}
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <img src="{% static 'images/favicons/favicon.ico' %}" alt="">
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbar-content"
+    aria-controls="navbar-content"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbar-content">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a
+          class="nav-link"
+          href="{% url 'showcase:demo' %}">
+          Demo
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="{% url 'accounts:user-detail' username=user.username %}">
+          Profile
+        </a>
+      </li>
+
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="http://example.com"
+          id="account-management"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false">Account management</a>
+        <div class="dropdown-menu" aria-labelledby="account-management">
+          <a class="dropdown-item" href="{% url 'account_reset_password' %}">Reset password</a>
+          <a class="dropdown-item" href="{% url 'account_email' %}">Manage email addresses</a>
+          <a class="dropdown-item" href="{% url 'socialaccount_connections' %}">Social accounts</a>
+        </div>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'account_logout' %}">
+          Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{%- endraw %}

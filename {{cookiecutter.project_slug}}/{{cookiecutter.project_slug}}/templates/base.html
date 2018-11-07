@@ -1,8 +1,8 @@
-{% raw %}
+{%- raw %}
 {% load static %}
 {% load i18n %}
 {% load static %}
-{% endraw %}
+{% endraw -%}
 
 {% if cookiecutter.use_compressor == 'y' -%}
   {% raw %}{% load compress %}{% endraw %}
@@ -31,42 +31,13 @@
     <![endif]-->
     {% raw %}
     <link rel="icon" href="{% static 'images/favicons/favicon.ico' %}">
-    {% endraw %}
+    {% endraw -%}
 
-    {% if cookiecutter.use_bootstrap_cdn == 'y' -%}
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous">
-
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-      defer>
-    </script>
-
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-      integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-      crossorigin="anonymous"
-      defer>
-    </script>
-
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
-      integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
-      crossorigin="anonymous"
-      defer>  
-    </script>
-    {% else %}
     {% raw -%}
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery.min.js' %}" defer></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
     {%- endraw %}
-    {%- endif %}
 
     {% raw -%}
     {% block css %}
@@ -74,7 +45,7 @@
       {% if cookiecutter.use_compressor == "y" -%}{% raw %}{% compress css %}{% endraw %}{%- endif %}
         <!-- This file stores project-specific CSS -->
 
-      {% if cookiecutter.use_sass_preprocessor == 'y' -%}
+      {%- if cookiecutter.use_sass_preprocessor == 'y' -%}
       {% raw -%}
       <link href="{% sass_src 'sass/project.scss' %}" rel="stylesheet">
       {%- endraw %}
@@ -84,28 +55,27 @@
       {%- endraw %}
       {%- endif %}
 
-      {% if cookiecutter.use_compressor == "y" -%}{% raw %}{% endcompress %}{% endraw %}{%- endif %}
+      {%- if cookiecutter.use_compressor == "y" -%}{% raw %}{% endcompress %}{% endraw %}{%- endif %}
     {% raw -%}
     {% endblock %}
     {% endraw -%}
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row pt-10">
-        <div class="col-6">
+    {%- raw %}
+    {% block navbar %}
+      {% if user.is_authenticated %}
+        {% include 'navbar.html' %}
+      {% endif %}
+    {% endblock navbar %}
+    {%- endraw -%}
+
+    <main role="main" class="mt-2">
+      <div class="container-fluid">
+        {%- raw %}
         {% block content %}{% endblock content %}
-        </div>
-        
-        <div class="col-4 offset-2">
-          {% raw -%}
-          {% include 'showcase/demo.html' %}
-          {% endraw -%}
-        </div>      
+        {%- endraw %}
       </div>
-    </div>
-    {% raw %}
-    {% block javascript %}{% endblock javascript %}
-    {% endraw %}
+    </main>
   </body>
 </html>
- 
+

@@ -40,21 +40,21 @@ api_urlpatterns = [
 ]
 
 
-# Standard django urlpatterns 
+# Standard django urlpatterns
 urlpatterns = [
-    path('', TemplateView.as_view(template_name='pages/home.html'), name='home'),
+    path(
+        '',
+        include('{{ cookiecutter.project_slug }}.showcase.urls', namespace='showcase'),
+    ),
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
+    path('accounts/', include('allauth.urls')),
     path(
         'accounts/',
         include('{{ cookiecutter.project_slug }}.accounts.urls', namespace='accounts'),
     ),
     # Your stuff: custom urls includes go here
-    path(
-        'showcase/',
-        include('{{ cookiecutter.project_slug }}.showcase.urls', namespace='showcase'),
-    ),
 ]
 
 urlpatterns += api_urlpatterns

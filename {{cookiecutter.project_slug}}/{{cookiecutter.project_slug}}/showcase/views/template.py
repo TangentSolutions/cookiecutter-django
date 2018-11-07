@@ -1,15 +1,16 @@
 from typing import Dict
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
-from django_tables2.views import SingleTableMixin, SingleTableView
-from showcase.tables import UserTable
-from showcase.filters import UserFilterSet
+from django_tables2.views import SingleTableMixin
+from {{cookiecutter.project_slug}}.showcase.tables import UserTable
+from {{cookiecutter.project_slug}}.showcase.filters import UserFilterSet
 
 
 User = get_user_model()
 
 
-class ShowcaseDemoView(SingleTableMixin, FilterView):
+class ShowcaseDemoView(LoginRequiredMixin, SingleTableMixin, FilterView):
     """Demo view showcasing tables, filters and export."""
 
     model = User

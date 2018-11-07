@@ -14,7 +14,7 @@ def media_storage(settings, tmpdir):
 @pytest.fixture
 def user() -> settings.AUTH_USER_MODEL:
     """Pytest user fixture which can be injected into test cases.
-	
+
 	Usage:
 
 		def test_user(user):
@@ -27,10 +27,10 @@ def user() -> settings.AUTH_USER_MODEL:
 @pytest.fixture
 def request_factory() -> RequestFactory:
     """Pytest fixture which injects a django request factory instance.
-	
+
 	Usage:
 		def test_user_view(request_factory):
-			response = request_factory.get(reverse('users:user-detail'))
+			response = request_factory.get(reverse('accounts:user-detail'))
 			assert response.status_code == 200
 	"""
 

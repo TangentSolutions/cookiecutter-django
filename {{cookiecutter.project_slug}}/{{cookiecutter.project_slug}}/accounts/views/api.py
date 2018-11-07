@@ -4,9 +4,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
-
-import accounts.serializers
-import accounts.permissions
+from {{cookiecutter.project_slug}}.accounts import serializers as accounts_serializers
+from {{cookiecutter.project_slug}}.accounts import permissions as accounts_permissions
 
 
 # Custom user model
@@ -15,12 +14,12 @@ User = get_user_model()
 
 class UserViewSet(viewsets.ModelViewSet):
     """Read only viewset for the user model.
-    
+
     Write operations are provided through custom actions.
     """
 
     queryset = User.objects.all()
-    serializer_class = accounts.serializers.UserSerializer
+    serializer_class = accounts_serializers.UserSerializer
     permission_classes = (IsAdminUser,)
 
     @action(
@@ -29,7 +28,7 @@ class UserViewSet(viewsets.ModelViewSet):
         url_name='me',
         url_path='me',
         permission_classes=(
-            IsAuthenticated & accounts.permissions.RequestUserIsInstanceUser,
+            IsAuthenticated & accounts_permissions.RequestUserIsInstanceUser,
         ),
     )
     def me(self, request: Request) -> Response:
@@ -47,12 +46,12 @@ class UserViewSet(viewsets.ModelViewSet):
         methods=['POST'],
         url_name='check-username-availability',
         url_path='check-username-availability',
-        serializer_class=accounts.serializers.UsernameAvailabilitySerializer,
+        serializer_class=accounts_serializers.UsernameAvailabilitySerializer,
         permission_classes=(AllowAny,),
     )
     def check_availability(self, request: Request) -> Response:
         """Check if the requested username is available.
-        
+
         Returns:
             A DRF response containing the username and a boolean indicating
             whether it is available or not.

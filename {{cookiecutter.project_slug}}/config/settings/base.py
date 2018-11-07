@@ -40,21 +40,10 @@ USE_TZ = True
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-{% if cookiecutter.use_docker == 'y' -%}
 DATABASES = {
     'default': env.db('DATABASE_URL'),
 }
-{%- else %}
 
-if platform.system() == 'Windows':
-    DATABASES = {
-        'default': env.db('DATABASE_URL', default='postgres://localhost/{{cookiecutter.project_slug}}'),
-    }
-else:
-    DATABASES = {
-        'default': env.db('DATABASE_URL', default='postgres:///{{cookiecutter.project_slug}}'),
-    }
-{%- endif %}
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 # URLS
@@ -124,7 +113,7 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = 'accounts.User'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = 'accounts:redirect'
+LOGIN_REDIRECT_URL = 'accounts:user-redirect'
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
 LOGIN_URL = 'account_login'
 
@@ -300,9 +289,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.users.adapters.AccountAdapter'
+ACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.accounts.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.users.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.accounts.adapters.SocialAccountAdapter'
 
 {% if cookiecutter.use_compressor == 'y' -%}
 # django-compressor

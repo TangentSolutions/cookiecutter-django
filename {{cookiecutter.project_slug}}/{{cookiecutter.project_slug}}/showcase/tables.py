@@ -14,7 +14,7 @@ class UserTable(django_tables2.Table):
     """User table to showcase django tables 2."""
     {% raw %}
     username = columns.TemplateColumn(
-        """<a href="{% url 'users:detail' username=value %}">{{value}}</a>"""
+        """<a href="{% url 'accounts:user-detail' username=value %}">{{value}}</a>"""
     )
     {% endraw %}
     first_name_is_long = columns.Column(

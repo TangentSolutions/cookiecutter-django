@@ -13,38 +13,6 @@ SUCCESS = "\x1b[1;32m [SUCCESS]: "
 DEBUG_VALUE = "debug"
 
 
-def remove_open_source_files():
-    """Helper function to remove open source files if specified during the creation."""
-
-    file_names = ["CONTRIBUTORS.txt", "LICENSE"]
-    for file_name in file_names:
-        os.remove(file_name)
-
-
-def remove_gplv3_files():
-    """Helper function to remove the gpl3 files if specified during the creation."""
-
-    file_names = ['COPYING']
-    for file_name in file_names:
-        os.remove(file_name)
-
-
-def remove_docker_files():
-    """Helper function to remove docker files if specified during the creation."""
-
-    shutil.rmtree('compose')
-
-    file_names = ['local.yml', 'production.yml', '.dockerignore']
-    for file_name in file_names:
-        os.remove(file_name)
-
-
-def remove_utility_files():
-    """Helper function to remove utility files if specified during the creation."""
-
-    shutil.rmtree('utility')
-
-
 def remove_celery_app():
     """Helper function to remove celery files if project does not make use of celery."""
 
@@ -224,10 +192,10 @@ def remove_git_hooks_directory():
     shutil.rmtree(os.path.join('git-hooks'))
 
 
-def remove_package_json():
+def remove_copy_bootstrap_file():
     """Remove the package.json file."""
 
-    os.remove('package.json')
+    os.remove('copy_bootstrap.py')
 
 
 def main():
@@ -241,12 +209,6 @@ def main():
 
     set_flags_in_settings_files()
 
-    if '{{ cookiecutter.open_source_license }}' == 'Not open source':
-        remove_open_source_files()
-
-    if '{{ cookiecutter.open_source_license }}' != 'GPLv3':
-        remove_gplv3_files()
-
     append_to_gitignore_file('.env')
     append_to_gitignore_file('.envs/*')
 
@@ -255,15 +217,10 @@ def main():
 
     if '{{ cookiecutter.use_celery }}'.lower() == 'n':
         remove_celery_app()
-
-        if '{{ cookiecutter.use_docker }}'.lower() == 'y':
-            remove_celery_compose_dirs()
+        remove_celery_compose_dirs()
 
     if '{{ cookiecutter.use_travisci }}'.lower() == 'n':
         remove_dottravisyml_file()
-
-    if '{{ cookiecutter.use_sass_preprocessor }}'.lower() == 'n':
-        remove_package_json()
 
     add_black_formatter_git_hook()
     apply_initial_black_formatting()

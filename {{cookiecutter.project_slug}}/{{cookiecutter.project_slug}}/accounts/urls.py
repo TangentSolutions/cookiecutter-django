@@ -4,8 +4,8 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
-from accounts.views.api import UserViewSet
-from accounts.views.template import (
+from {{cookiecutter.project_slug}}.accounts.views.api import UserViewSet
+from {{cookiecutter.project_slug}}.accounts.views.template import (
     user_list_view,
     user_redirect_view,
     user_update_view,
@@ -48,9 +48,8 @@ api_urlpatterns = [path('', api_root, name='api-root'), path('', include(router.
 
 # Template based url patterns
 urlpatterns = [
-    path('', view=user_list_view, name='list'),
-    path('', include('allauth.urls')),
-    path('redirect/', view=user_redirect_view, name='redirect'),
-    path('update/', view=user_update_view, name='update'),
-    path('<str:username>/', view=user_detail_view, name='detail'),
+    path('', view=user_list_view, name='user-list'),
+    path('redirect/', view=user_redirect_view, name='user-redirect'),
+    path('update/', view=user_update_view, name='user-update'),
+    path('<str:username>/', view=user_detail_view, name='user-detail'),
 ]
