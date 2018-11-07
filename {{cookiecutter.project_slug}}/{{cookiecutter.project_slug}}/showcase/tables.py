@@ -35,7 +35,7 @@ class UserTable(django_tables2.Table):
             {% raw %}
             element = f"""
                 <div>
-                    <img class="invert" src="{uri}" alt="warning">
+                    <img src="{uri}" alt="warning">
                 </div>
             """
             {%- endraw %}

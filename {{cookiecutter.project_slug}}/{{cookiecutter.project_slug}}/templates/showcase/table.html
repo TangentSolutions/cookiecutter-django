@@ -13,13 +13,13 @@
 					<button
 						id="filter-collapse"
 						type="button"
-					  	data-toggle="collapse"
+					  data-toggle="collapse"
 						data-target="#table-filters"
 						aria-expanded="true"
 						aria-controls="table-filters"
 						class="btn btn-primary">
-						
-						<span>Hide</span>
+
+            <span id="filter-collapse-label">Hide</span>
 						<img class="invert" src="{% static 'feather/search.svg' %}"></img>
 					</button>
 				</div>
@@ -29,15 +29,18 @@
 			<div
 				id="table-filters"
 				class="col-lg-12 collapse show">
-			    <form method="get">
+			    <form
+            id="table-filter-form"
+            method="get">
+
 			    	<div class="form-group">
 						{% crispy filter.form 'bootstrap4' %}
 
 						<div class="btn-group float-right">
 							<button
 								type="button"
-								id="clear"
-								name="clear"
+								id="clear-filters"
+								name="clear-filters"
 								class="btn btn-info">
 								Clear
 							</button>
