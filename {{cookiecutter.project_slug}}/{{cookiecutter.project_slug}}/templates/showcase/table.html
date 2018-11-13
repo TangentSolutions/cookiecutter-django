@@ -65,5 +65,7 @@
 	{% render_table table 'django_tables2/bootstrap4.html' %}
 
 	<script type="module" src="{% static 'js/table.js' %}"></script>
+  <!-- Fallback or browsers which don't support type="module" -->
+  <script src="{% static 'js/table.js' %}" nomodule></script>
 {% endblock content %}
 {%- endraw %}

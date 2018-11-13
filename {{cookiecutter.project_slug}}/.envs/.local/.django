@@ -1,6 +1,7 @@
 # General
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
+PYTHONBREAKPOINT="web_pdb.set_trace"
 
 # Redis
 REDIS_URL=redis://redis:6379/0
