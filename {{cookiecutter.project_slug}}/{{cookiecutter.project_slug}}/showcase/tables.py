@@ -20,7 +20,10 @@ class UserTable(django_tables2.Table):
     )
     {% endraw %}
     first_name_is_long = columns.Column(
-        verbose_name='First name is long', accessor='username', orderable=False
+        verbose_name='First name is long',
+        accessor='username',
+        orderable=False,
+        exclude_from_export=True
     )
 
     class Meta:

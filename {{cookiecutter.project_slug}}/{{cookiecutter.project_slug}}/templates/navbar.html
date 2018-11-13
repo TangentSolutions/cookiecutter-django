@@ -15,20 +15,26 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbar-content">
+  {% url 'showcase:demo' as showcase_url %}
+  {% url 'accounts:user-detail' username=user.username as user_detail_url %}
+  {% url 'account_reset_password' as reset_password_url %}
+  {% url 'account_email' as account_email_url %}
+  {% url 'socialaccount_connections' as social_connections_url %}
+
+   <div class="collapse navbar-collapse" id="navbar-content">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item {% if request.get_full_path == showcase_url %}active{% endif %}">
         <a
           class="nav-link"
-          href="{% url 'showcase:demo' %}">
+          href="{{ showcase_url }}">
           Demo
           <span class="sr-only">(current)</span>
         </a>
       </li>
       <li class="nav-item">
         <a
-          class="nav-link"
-          href="{% url 'accounts:user-detail' username=user.username %}">
+          class="nav-link {% if request.get_full_path == user_detail_url %}active{% endif %}"
+          href="{{ user_detail_url }}">
           Profile
         </a>
       </li>
@@ -36,15 +42,26 @@
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle"
-          href="http://example.com"
           id="account-management"
           data-toggle="dropdown"
           aria-haspopup="true"
           aria-expanded="false">Account management</a>
         <div class="dropdown-menu" aria-labelledby="account-management">
-          <a class="dropdown-item" href="{% url 'account_reset_password' %}">Reset password</a>
-          <a class="dropdown-item" href="{% url 'account_email' %}">Manage email addresses</a>
-          <a class="dropdown-item" href="{% url 'socialaccount_connections' %}">Social accounts</a>
+          <a
+            class="dropdown-item {% if request.get_full_path == reset_password_url %}active{% endif %}"
+            href="{{ reset_password_url }}">
+            Reset password
+          </a>
+          <a
+            class="dropdown-item {% if request.get_full_path == account_email_url %}active{% endif %}"
+            href="{{ account_email_url }}">
+            Manage email addresses
+          </a>
+          <a
+            class="dropdown-item {% if request.get_full_path == social_connections_url %}active{% endif %}"
+            href="{{ social_connections_url }}">
+            Social accounts
+          </a>
         </div>
       </li>
     </ul>

@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin, SingleTableView
+from django_tables2.export.views import ExportMixin
 from django_weasyprint import WeasyTemplateResponseMixin
 from {{cookiecutter.project_slug}}.showcase.tables import UserTable, UserTablePdf
 from {{cookiecutter.project_slug}}.showcase.filters import UserFilterSet
@@ -12,7 +13,7 @@ from {{cookiecutter.project_slug}}.showcase.filters import UserFilterSet
 User = get_user_model()
 
 
-class ShowcaseDemoView(LoginRequiredMixin, SingleTableMixin, FilterView):
+class ShowcaseDemoView(LoginRequiredMixin, ExportMixin, SingleTableMixin, FilterView):
     """Demo view showcasing tables, filters and export."""
 
     model = User
