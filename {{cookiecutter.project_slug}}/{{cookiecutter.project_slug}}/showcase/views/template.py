@@ -1,9 +1,11 @@
 from typing import Dict
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
-from django_tables2.views import SingleTableMixin
-from {{cookiecutter.project_slug}}.showcase.tables import UserTable
+from django_tables2.views import SingleTableMixin, SingleTableView
+from django_weasyprint import WeasyTemplateResponseMixin
+from {{cookiecutter.project_slug}}.showcase.tables import UserTable, UserTablePdf
 from {{cookiecutter.project_slug}}.showcase.filters import UserFilterSet
 
 
@@ -30,5 +32,18 @@ class ShowcaseDemoView(LoginRequiredMixin, SingleTableMixin, FilterView):
         return {}
 
 
+class ShowcaseDemoViewPrintView(
+    LoginRequiredMixin, WeasyTemplateResponseMixin, SingleTableView
+):
+    """Print as PDF view for the ShowcaseDemoView."""
+
+    model = User
+    template_name = 'showcase/table_pdf.html'
+    table_class = UserTablePdf
+    table_pagination = False
+    pdf_stylesheets = [str(settings.APPS_DIR.path('static')) + '/css/bootstrap.min.css']
+
+
 # View functions
 showcase_demo_view = ShowcaseDemoView.as_view()
+showcase_demo_view_print = ShowcaseDemoViewPrintView.as_view()

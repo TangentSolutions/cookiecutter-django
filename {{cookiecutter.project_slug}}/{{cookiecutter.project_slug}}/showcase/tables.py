@@ -45,3 +45,10 @@ class UserTable(django_tables2.Table):
             element = ''
 
         return format_html(element)
+
+
+class UserTablePdf(UserTable):
+    """User table to showcase django tables 2 export to pdf."""
+
+    class Meta:
+        exclude = ('first_name_is_long',)

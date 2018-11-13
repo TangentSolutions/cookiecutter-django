@@ -1,5 +1,5 @@
 from django.urls import path
-from {{cookiecutter.project_slug}}.showcase.views.template import showcase_demo_view
+from {{cookiecutter.project_slug}}.showcase.views.template import showcase_demo_view, showcase_demo_view_print
 
 
 app_name = 'showcase'
@@ -9,5 +9,7 @@ api_urlpatterns = []
 
 
 # Template based url patterns
-urlpatterns = [path('', showcase_demo_view, name='demo')]
-
+urlpatterns = [
+    path('', showcase_demo_view, name='demo'),
+    path('pdf/', showcase_demo_view_print, name='demo-pdf'),
+]
