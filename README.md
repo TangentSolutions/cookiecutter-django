@@ -33,6 +33,38 @@ Optionally you can load some fixtures for the demo.
 $ docker-compose -f local.yml run --rm django python manage.py loaddata fixtures.json
 ```
 
+# Included libraries
+
+## web-pdb
+
+Web pdb is included and can be used as follows (Note the port is important in the example below as this port is exposed by the local docker container).
+
+```python
+import web_pdb
+
+web_pdb.set_trace(port=1836)
+```
+
+Within the local environment `PYTHONBREAKPOINT="web_pdb.set_trace"` is set. Therefore in Python 3.7 and up the debugger can be activated by calling `breakpoint()`.
+
+## django_tables2 & django_filters
+
+Django tables and django filters are included by default. A template for a table with filters can be found
+within the showcase application. The template includes the following features:
+
+- Collapsable django_filter form for the table
+- Table export functionality
+- Automatic collapse/show functionality on the filter form based on the current state of filters
+
+To enable export on your table just add an `export_formats` attribute to the table class containing the formats you wish to support. 
+
+```python
+class UserTable(django_tables2.Table):
+    """User table to showcase django tables 2."""
+
+    export_formats = ('csv', 'json', 'latex', 'ods', 'tsv', 'xls', 'xlsx', 'yml')
+```
+
 TODO:
 
 - Add django channels support
