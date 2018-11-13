@@ -8,6 +8,11 @@ ENV PYTHONUNBUFFERED 1
 
 RUN apt-get update
 RUN apt-get -y install apt-utils libsass-dev
+{%- if cookiecutter.pdf_plugin == "y" %}
+RUN apt-get -y install libcairo2 libpango-1.0-0 \
+	libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
+	libffi-dev shared-mime-info
+{%- endif %}
 
 # Requirements are installed here to ensure they will be cached.
 RUN pip install --upgrade pip

@@ -17,7 +17,16 @@ class APIRoot(APIView):
     """Root view for all API based views in all applications."""
 
     def get(self, request: Request) -> Response:
-        """"""
+        """Generate a mapping of url names to urls for the APIs within
+        the application.
+
+        Args:
+            request: A DRF request instance
+
+        Returns:
+            A response containing the names and urls for the root apis of each
+            application.
+        """
 
         routes = {'accounts': reverse('accounts-api:api-root', request=request)}
 
