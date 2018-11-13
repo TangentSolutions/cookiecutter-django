@@ -30,13 +30,21 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     """Update view for the user model."""
 
     model = User
-    fields = ['name']
+    fields = ['first_name', 'last_name']
     template_name = 'users/user_form.html'
 
-    def get_success_url(self):
-        return reverse('accounts:user-detail')
+    def get_success_url(self) -> str:
+        """Resolve the user-detail url for the request user.
 
-    def get_object(self):
+        Returns:
+            A url for the redirect.
+        """
+
+        return reverse(
+            'accounts:user-detail', kwargs={'username': self.request.user.username}
+        )
+
+    def get_object(self) -> User:
         return User.objects.get(username=self.request.user.username)
 
 

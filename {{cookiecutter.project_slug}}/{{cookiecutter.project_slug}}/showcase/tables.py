@@ -12,7 +12,9 @@ User = get_user_model()
 
 class UserTable(django_tables2.Table):
     """User table to showcase django tables 2."""
-    {% raw %}
+
+    export_formats = ('csv', 'json', 'latex', 'ods', 'tsv', 'xls', 'xlsx', 'yml')
+    {%- raw %}
     username = columns.TemplateColumn(
         """<a href="{% url 'accounts:user-detail' username=value %}">{{value}}</a>"""
     )

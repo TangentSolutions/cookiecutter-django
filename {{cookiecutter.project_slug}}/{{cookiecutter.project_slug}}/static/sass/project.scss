@@ -1,9 +1,18 @@
 {%- if cookiecutter.use_sass_preprocessor == 'y' %}
-@import "custom_vars"; 
+@import "custom_vars";
 @import "node_modules/bootstrap/scss/bootstrap";
 {%- endif %}
 
 img.invert {
   -webkit-filter: invert(100%);
   filter: invert(100%);
+}
+
+#filter-collapse {
+  color: $gray-600;
+  text-decoration: none;
+}
+
+#filter-collapse:hover > div.card {
+  box-shadow: 2px 2px $gray-200;
 }

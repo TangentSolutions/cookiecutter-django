@@ -5,14 +5,14 @@ const clearFilterButton = document.getElementById('clear-filters');
 const tableFilterForm = document.getElementById('table-filter-form');
 
 collapseFilterButton.addEventListener('click', function() {
-	var isCollapsed = !tableFilterContent.classList.contains('show');
+	var hasShow = !tableFilterContent.classList.contains('show');
 
-	collapseFilterButtonLabel.innerText = isCollapsed ? 'Show' : 'Hide';
+	collapseFilterButtonLabel.innerText = hasShow ? 'Hide' : 'Show';
 });
 
 
 clearFilterButton.addEventListener('click', function() {
-	tableFilterForm.querySelector('input').forEach(input => {
+	tableFilterForm.querySelectorAll('input').forEach(input => {
 		input.value = '';
 	});
 
