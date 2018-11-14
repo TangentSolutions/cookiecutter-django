@@ -21,7 +21,7 @@
     "9.3"
   ],
   "pdf_plugin": "y",
-  "use_graphql": "y",
+  "use_graphql": "n",
   "use_sass_preprocessor": "y",
   "use_compressor": "y",
   "use_celery": "y",

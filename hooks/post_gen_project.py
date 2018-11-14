@@ -198,6 +198,13 @@ def remove_copy_bootstrap_file():
     os.remove('copy_bootstrap.py')
 
 
+def remove_graphql_files():
+    """Remove the package.json file."""
+
+    path = os.path.join('{{ cookiecutter.project_slug }}', 'accounts', 'schema.py')
+    os.remove(path)
+
+
 def main():
     debug = '{{ cookiecutter.debug }}'.lower() == 'y'
 
@@ -221,6 +228,9 @@ def main():
 
     if '{{ cookiecutter.use_travisci }}'.lower() == 'n':
         remove_dottravisyml_file()
+
+    if '{{ cookiecutter.use_graphql }}'.lower() == 'n':
+        remove_graphql_files()
 
     add_black_formatter_git_hook()
     apply_initial_black_formatting()

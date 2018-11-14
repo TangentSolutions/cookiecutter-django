@@ -45,12 +45,16 @@ class APIRoot(APIView):
 
 # API url patterns
 api_root = APIRoot.as_view()
+{%- if cookiecutter.use_graphql = "y" %}
 graphql_view = GraphQLView.as_view(schema=schema, graphiql=True)
+{% endif -%}
 
 api_urlpatterns = [
     path('', api_root, name='api-root'),
     path('', include(router.urls)),
+    {%- if cookiecutter.use_graphql = "y" %}
     path('graphiql', graphql_view, name='graphiql'),
+    {%- endif %}
 ]
 
 # Template based url patterns
