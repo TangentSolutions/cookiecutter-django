@@ -59,7 +59,11 @@ class UserTable(django_tables2.Table):
 TODO:
 
 - [ ] Add django channels support
+	- [ ] Investigate using a reverse proxy within container
 - [x] Add GraphQL support
 	- [ ] Integrate with DRF permissioning
+- [ ] startapp template
+	- [ ] Create startapp templates that reflect choices made by user i.e. include graphql
+	- [ ] Include test suite structure
 - [ ] Restructure project structure to standard django structure
 - [ ] Tests
