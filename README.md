@@ -7,6 +7,8 @@ A django cookie cutter template inspired by [cookiecutter-django](https://github
 
 # Installation & Usage
 
+> Make sure your env is using Python 3+
+
 ```bash
 $ python -m venv env
 $ source env/bin/activate
