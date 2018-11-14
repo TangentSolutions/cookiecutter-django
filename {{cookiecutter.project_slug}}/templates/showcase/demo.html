@@ -1,0 +1,56 @@
+{% raw -%}
+<div class="row">
+  <div class="col-sm-12">
+    <h2>Builtins</h2>
+  </div>
+
+  <div class="col-sm-12">
+    <a href="{% url 'account_login' %}">
+      Login {% if user.is_authenticated %} (Requires logout) {% endif %}
+    </a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'account_logout' %}">
+       Logout {% if not user.is_authenticated %} (Requires login) {% endif %}
+    </a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'account_signup' %}">
+      Sign up {% if user.is_authenticated %} (Requires logout) {% endif %}
+    </a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'account_reset_password' %}">Reset password</a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'account_email' %}">Manage email addresses</a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'socialaccount_connections' %}">
+      Social connections {% if not user.is_authenticated %} (Requires login) {% endif %}
+    </a>
+  </div>
+
+  <div class="col-sm-12">
+    {% if user.is_authenticated %}
+    <a
+      href="{% url 'accounts:user-detail' username=user.username %}">
+      User detail
+    </a>
+    {% else %}
+    <a href="">User Detail (Requires login)</a>
+    {% endif %}
+  </div>
+
+  <div class="col-sm-12">
+    <a href="{% url 'accounts:user-update' %}">
+      Update user {% if not user.is_authenticated %} (Requires login) {% endif %}
+    </a>
+  </div>
+  <div class="col-sm-12">
+    <a href="{% url 'showcase:demo' %}">
+      Demo
+    </a>
+  </div>
+</div>
+{%- endraw %}
