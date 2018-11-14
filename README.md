@@ -7,16 +7,18 @@ A django cookie cutter template inspired by [cookiecutter-django](https://github
 
 # Installation & Usage
 
+> Make sure your env is using Python 3+
+
 ```bash
 $ python -m venv env
 $ source env/bin/activate
 
 $ pip install --upgrade pip
-$ pip install -r requirements.txt
+$ pip install cookiecutter
 $ cookiecutter https://github.com/TangentSolutions/cookiecutter-django
 ```
 
-After generating the project cd into it and run the following.
+After generating the project `cd into the folder` and run the following.
 
 ```bash
 $ ./install-demo.sh
