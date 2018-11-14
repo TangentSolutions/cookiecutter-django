@@ -69,4 +69,5 @@ TODO:
 
 - Add django channels support
 - Add GraphQL support
-- Investigate replacing allauth
+- Restructure project structure to standard django structure
+- Tests

@@ -38,6 +38,7 @@ api_root = APIRoot.as_view()
 
 # DRF urlpatterns
 api_urlpatterns = [
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('api/', api_root, name='api-root'),
     path(
         'api/accounts/',

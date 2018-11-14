@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, RedirectView, UpdateView
+from {{ cookiecutter.project_slug }}.accounts.forms import UpdateUserDetailForm
 
 
 # Custom user model
@@ -30,7 +31,8 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     """Update view for the user model."""
 
     model = User
-    fields = ['first_name', 'last_name']
+    form_class = UpdateUserDetailForm
+    # fields = ['first_name', 'last_name'] # For an auto generated form use fields
     template_name = 'users/user_form.html'
 
     def get_success_url(self) -> str:
