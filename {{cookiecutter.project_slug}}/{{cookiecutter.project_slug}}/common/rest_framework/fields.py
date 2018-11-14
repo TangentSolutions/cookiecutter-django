@@ -1,6 +1,6 @@
 from rest_framework import fields
 from rest_framework import serializers
-from {{ cookiecutter.project_slug }}.common.validation import luhn_algorithm
+from {{ cookiecutter.project_slug }}.common.validation import is_valid_luhn_algorithm
 
 
 class LuhnField(fields.CharField):
@@ -17,7 +17,7 @@ class LuhnField(fields.CharField):
         value = super().to_internal_value(value)
 
         try:
-            is_valid = luhn_algorithm(value)
+            is_valid = is_valid_luhn_algorithm(value)
         except (TypeError, ValueError):
             is_valid = False
 

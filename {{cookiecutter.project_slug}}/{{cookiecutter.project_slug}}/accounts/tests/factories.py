@@ -1,14 +1,30 @@
 from typing import Any, Sequence
 from django.contrib.auth import get_user_model
-from factory import DjangoModelFactory, Faker, post_generation
+from factory import DjangoModelFactory, post_generation
+from {{ cookiecutter.project_slug }}.common.fake.providers import SouthAfricaCommonProvider
+
+import faker
+import factory
 
 
 class UserFactory(DjangoModelFactory):
     """Django user factory for testing purposes."""
 
-    username = Faker('user_name')
-    email = Faker('email')
-    name = Faker('name')
+    username = factory.Faker('user_name')
+    email = factory.Faker('email')
+
+    class Meta:
+        model = get_user_model()
+        django_get_or_create = ['username']
+
+    @factory.lazy_attribute
+    def id_number(self) -> str:
+        """Create a valid id number for the user."""
+
+        fake = faker.Faker()
+        fake.add_provider(SouthAfricaCommonProvider)
+
+        return fake.id_number()
 
     @post_generation
     def password(self, create: bool, extracted: Sequence[Any], **kwargs) -> None:
@@ -24,7 +40,3 @@ class UserFactory(DjangoModelFactory):
             lower_case=True,
         ).generate(extra_kwargs={})
         self.set_password(password)
-
-    class Meta:
-        model = get_user_model()
-        django_get_or_create = ['username']

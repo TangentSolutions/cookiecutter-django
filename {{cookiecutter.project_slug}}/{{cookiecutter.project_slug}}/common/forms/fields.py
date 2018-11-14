@@ -1,5 +1,5 @@
 from django import forms
-from {{ cookiecutter.project_slug }}.common.validation import luhn_algorithm, is_cipc_registration_number
+from {{ cookiecutter.project_slug }}.common.validation import is_valid_luhn_algorithm, is_valid_cipc_registration_number
 
 
 class LuhnField(forms.CharField):
@@ -19,7 +19,7 @@ class LuhnField(forms.CharField):
         super().validate(value)
 
         try:
-            is_valid = luhn_algorithm(value)
+            is_valid = is_valid_luhn_algorithm(value)
         except (TypeError, ValueError):
             is_valid = False
 
@@ -49,12 +49,12 @@ class CompanyRegistrationNumberField(forms.CharField):
     }
 
     def validate(self, value: str) -> None:
-        """Validate the field using the is_cipc_registration_number helper function."""
+        """Validate the field using the is_valid_cipc_registration_number helper function."""
 
         super().validate(value)
 
         try:
-            is_valid = is_cipc_registration_number(value)
+            is_valid = is_valid_cipc_registration_number(value)
         except (TypeError, ValueError):
             is_valid = False
 
