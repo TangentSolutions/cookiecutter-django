@@ -12,11 +12,11 @@ $ python -m venv env
 $ source env/bin/activate
 
 $ pip install --upgrade pip
-$ pip install -r requirements.txt
+$ pip install cookiecutter bumpversion
 $ cookiecutter https://github.com/TangentSolutions/cookiecutter-django
 ```
 
-After generating the project cd into it and run the following.
+After generating the project `cd into the folder` and run the following.
 
 ```bash
 $ ./install-demo.sh
@@ -71,3 +71,8 @@ TODO:
 - [ ] Restructure project structure to standard django structure
 - [ ] Tests
 - [ ] Install cairo for weasy print
+- [x] Specify port in docker compose
+- [x] Use python 3.6.7
+- [ ] Update gitignore in post hook
+- [x] Update bumpversion config
+- [ ] Tests run on sqlite

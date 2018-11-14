@@ -31,7 +31,7 @@ class UserFactory(DjangoModelFactory):
         """Post generation hook to set the user's password.
         """
 
-        password = Faker(
+        password = factory.Faker(
             "password",
             length=42,
             special_chars=True,
