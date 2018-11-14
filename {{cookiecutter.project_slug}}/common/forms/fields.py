@@ -1,5 +1,5 @@
 from django import forms
-from {{ cookiecutter.project_slug }}.common.validation import is_valid_luhn_algorithm, is_valid_cipc_registration_number
+from common.validation import is_valid_luhn_algorithm, is_valid_cipc_registration_number
 
 
 class LuhnField(forms.CharField):
@@ -41,7 +41,7 @@ class CompanyRegistrationNumberField(forms.CharField):
         - \\d{6} is a six digit number assigned by the CIPC
         - \\d{2} represents the type of company
 
-    For valid CIPC company types see {{ cookiecutter.project_slug }}.common.validation.CIPC_COMPANY_CHOICES.
+    For valid CIPC company types see common.validation.CIPC_COMPANY_CHOICES.
     """
 
     default_error_messages = {

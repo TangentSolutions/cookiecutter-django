@@ -16,7 +16,7 @@ app = Celery('{{cookiecutter.project_slug}}')
 
 
 class CeleryAppConfig(AppConfig):
-    name = '{{cookiecutter.project_slug}}.taskapp'
+    name = 'taskapp'
     verbose_name = 'Celery Config'
 
     def ready(self):

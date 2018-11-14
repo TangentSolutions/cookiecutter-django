@@ -1,7 +1,7 @@
 from typing import Any, Sequence
 from django.contrib.auth import get_user_model
 from factory import DjangoModelFactory, post_generation
-from {{ cookiecutter.project_slug }}.common.faker.providers import SouthAfricaCommonProvider
+from common.faker.providers import SouthAfricaCommonProvider
 
 import faker
 import factory

@@ -33,7 +33,7 @@ Web pdb is included and can be used as follows (Note the port is important in th
 ```python
 import web_pdb
 
-web_pdb.set_trace(port=1836)
+web_pdb.set_trace(port=1986)
 ```
 
 Within the local environment `PYTHONBREAKPOINT="web_pdb.set_trace"` is set. Therefore in Python 3.7 and up the debugger can be activated by calling `breakpoint()`.
@@ -67,3 +67,4 @@ TODO:
 	- [ ] Include test suite structure
 - [ ] Restructure project structure to standard django structure
 - [ ] Tests
+- [ ] Install cairo for weasy print

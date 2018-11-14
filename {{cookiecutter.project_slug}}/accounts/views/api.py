@@ -4,8 +4,8 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.permissions import IsAdminUser, AllowAny, IsAuthenticated
-from {{cookiecutter.project_slug}}.accounts import serializers as accounts_serializers
-from {{cookiecutter.project_slug}}.accounts import permissions as accounts_permissions
+from accounts import serializers as accounts_serializers
+from accounts import permissions as accounts_permissions
 
 
 # Custom user model

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from {{ cookiecutter.project_slug }}.common.rest_framework.fields import LuhnField
+from common.rest_framework.fields import LuhnField
 
 
 # Custom user model

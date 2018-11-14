@@ -6,8 +6,8 @@ from django_filters.views import FilterView
 from django_tables2.views import SingleTableMixin, SingleTableView
 from django_tables2.export.views import ExportMixin
 from django_weasyprint import WeasyTemplateResponseMixin
-from {{cookiecutter.project_slug}}.showcase.tables import UserTable, UserTablePdf
-from {{cookiecutter.project_slug}}.showcase.filters import UserFilterSet
+from showcase.tables import UserTable, UserTablePdf
+from showcase.filters import UserFilterSet
 
 
 User = get_user_model()
@@ -42,7 +42,7 @@ class ShowcaseDemoViewPrintView(
     template_name = 'showcase/table_pdf.html'
     table_class = UserTablePdf
     table_pagination = False
-    pdf_stylesheets = [str(settings.APPS_DIR.path('static')) + '/css/bootstrap.min.css']
+    pdf_stylesheets = [str(settings.ROOT_DIR.path('static')) + '/css/bootstrap.min.css']
 
 
 # View functions

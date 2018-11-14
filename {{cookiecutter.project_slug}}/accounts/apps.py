@@ -3,7 +3,7 @@ from django.apps import AppConfig
 
 class AccountsAppConfig(AppConfig):
 
-    name = '{{ cookiecutter.project_slug }}.accounts'
+    name = 'accounts'
     verbose_name = 'Accounts'
 
     def ready(self):

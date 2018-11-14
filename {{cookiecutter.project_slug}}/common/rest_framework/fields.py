@@ -1,6 +1,6 @@
 from rest_framework import fields
 from rest_framework import serializers
-from {{ cookiecutter.project_slug }}.common.validation import is_valid_luhn_algorithm
+from common.validation import is_valid_luhn_algorithm
 
 
 class LuhnField(fields.CharField):

@@ -16,7 +16,7 @@ DEBUG_VALUE = "debug"
 def remove_celery_app():
     """Helper function to remove celery files if project does not make use of celery."""
 
-    shutil.rmtree(os.path.join('{{ cookiecutter.project_slug }}', 'taskapp'))
+    shutil.rmtree(os.path.join('taskapp'))
 
 
 def remove_dottravisyml_file():
@@ -201,7 +201,7 @@ def remove_copy_bootstrap_file():
 def remove_graphql_files():
     """Remove the package.json file."""
 
-    path = os.path.join('{{ cookiecutter.project_slug }}', 'accounts', 'schema.py')
+    path = os.path.join('accounts', 'schema.py')
     os.remove(path)
 
 

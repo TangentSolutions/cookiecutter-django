@@ -1,5 +1,5 @@
-from {{ cookiecutter.project_slug }}.accounts.forms import UserCreationForm
-from {{ cookiecutter.project_slug }}.accounts.tests.factories import UserFactory
+from accounts.forms import UserCreationForm
+from accounts.tests.factories import UserFactory
 
 import pytest
 

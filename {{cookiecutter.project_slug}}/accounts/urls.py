@@ -6,10 +6,10 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 {% if cookiecutter.use_graphql == "y" -%}
 from graphene_django.views import GraphQLView
-from {{cookiecutter.project_slug}}.accounts.schema import schema
+from accounts.schema import schema
 {% endif -%}
-from {{cookiecutter.project_slug}}.accounts.views.api import UserViewSet
-from {{cookiecutter.project_slug}}.accounts.views.template import (
+from accounts.views.api import UserViewSet
+from accounts.views.template import (
     user_list_view,
     user_redirect_view,
     user_update_view,

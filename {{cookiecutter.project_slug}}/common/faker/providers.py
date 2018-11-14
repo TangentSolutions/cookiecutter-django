@@ -1,5 +1,5 @@
 from faker.providers import BaseProvider
-from {{ cookiecutter.project_slug }}.common.validation import append_check_digit_luhn_algorithm
+from common.validation import append_check_digit_luhn_algorithm
 
 import secrets
 

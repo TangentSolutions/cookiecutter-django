@@ -323,7 +323,7 @@ Session.vim
 tags
 
 ### Project template
-{{ cookiecutter.project_slug }}/media/
+/media/
 
 .pytest_cache/
 .ipython/

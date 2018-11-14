@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin
 from django.contrib.auth import get_user_model
-from {{ cookiecutter.project_slug }}.accounts.forms import UserChangeForm, UserCreationForm
+from accounts.forms import UserChangeForm, UserCreationForm
 
 
 User = get_user_model()

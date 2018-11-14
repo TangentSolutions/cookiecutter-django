@@ -9,7 +9,7 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 
-import {{ cookiecutter.project_slug }}.accounts.urls
+import accounts.urls
 
 
 # Root view for all API endpoints
@@ -42,28 +42,19 @@ api_urlpatterns = [
     path('api/', api_root, name='api-root'),
     path(
         'api/accounts/',
-        include(
-            ({{ cookiecutter.project_slug }}.accounts.urls.api_urlpatterns, 'accounts'),
-            namespace='accounts-api'
-        ),
+        include((accounts.urls.api_urlpatterns, 'accounts'), namespace='accounts-api'),
     ),
 ]
 
 
 # Standard django urlpatterns
 urlpatterns = [
-    path(
-        '',
-        include('{{ cookiecutter.project_slug }}.showcase.urls', namespace='showcase'),
-    ),
+    path('', include('showcase.urls', namespace='showcase')),
     # Django Admin, use {% raw %}{% url 'admin:index' %}{% endraw %}
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path('accounts/', include('allauth.urls')),
-    path(
-        'accounts/',
-        include('{{ cookiecutter.project_slug }}.accounts.urls', namespace='accounts'),
-    ),
+    path('accounts/', include('accounts.urls', namespace='accounts')),
     # Your stuff: custom urls includes go here
 ]
 

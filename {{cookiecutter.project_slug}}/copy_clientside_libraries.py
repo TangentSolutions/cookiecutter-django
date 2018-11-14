@@ -20,12 +20,10 @@ def copy_client_side_dependencies():
     ]
 
     for path in js_libraries:
-        shutil.copy(path, os.path.join('{{ cookiecutter.project_slug }}', 'static/js/'))
+        shutil.copy(path, os.path.join('static/js/'))
 
     for path in css_libraries:
-        shutil.copy(
-            path, os.path.join('{{ cookiecutter.project_slug }}', 'static/css/')
-        )
+        shutil.copy(path, os.path.join('static/css/'))
 
 
 if __name__ == '__main__':

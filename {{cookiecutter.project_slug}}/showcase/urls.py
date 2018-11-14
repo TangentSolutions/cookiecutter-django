@@ -1,5 +1,5 @@
 from django.urls import path
-from {{cookiecutter.project_slug}}.showcase.views.template import showcase_demo_view, showcase_demo_view_print
+from showcase.views.template import showcase_demo_view, showcase_demo_view_print
 
 
 app_name = 'showcase'

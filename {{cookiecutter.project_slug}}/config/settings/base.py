@@ -8,7 +8,6 @@ import platform
 
 
 ROOT_DIR = environ.Path(__file__) - 3  # ({{ cookiecutter.project_slug }}/config/settings/base.py - 3 = {{ cookiecutter.project_slug }}/)
-APPS_DIR = ROOT_DIR.path('{{ cookiecutter.project_slug }}')
 
 env = environ.Env()
 
@@ -88,8 +87,8 @@ THIRD_PARTY_APPS = [
 ]
 
 LOCAL_APPS = [
-    '{{ cookiecutter.project_slug }}.showcase.apps.ShowcaseAppConfig',
-    '{{ cookiecutter.project_slug }}.accounts.apps.AccountsAppConfig',
+    'showcase.apps.ShowcaseAppConfig',
+    'accounts.apps.AccountsAppConfig',
     # Your stuff: custom apps go here
 ]
 
@@ -111,7 +110,7 @@ SASS_PROCESSOR_INCLUDE_DIRS = [os.path.join(ROOT_DIR, 'node_modules/bootstrap')]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#migration-modules
 MIGRATION_MODULES = {
-    'sites': '{{ cookiecutter.project_slug }}.contrib.sites.migrations'
+    'sites': 'contrib.sites.migrations'
 }
 
 # AUTHENTICATION
@@ -185,7 +184,7 @@ STATIC_ROOT = str(ROOT_DIR('staticfiles'))
 STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
-    str(APPS_DIR.path('static')),
+    str(ROOT_DIR.path('static')),
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
@@ -197,7 +196,7 @@ STATICFILES_FINDERS = [
 # MEDIA
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR('media'))
+MEDIA_ROOT = str(ROOT_DIR('media'))
 # https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
@@ -210,7 +209,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # https://docs.djangoproject.com/en/dev/ref/settings/#template-dirs
         'DIRS': [
-            str(APPS_DIR.path('templates')),
+            str(ROOT_DIR.path('templates')),
         ],
         'OPTIONS': {
             # https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
@@ -242,7 +241,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
 FIXTURE_DIRS = (
-    str(APPS_DIR.path('fixtures')),
+    str(ROOT_DIR.path('fixtures')),
 )
 
 # EMAIL
@@ -267,7 +266,7 @@ ADMIN_URL = 'admin/'
 {% if cookiecutter.use_celery == 'y' -%}
 # Celery
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ['{{cookiecutter.project_slug}}.taskapp.celery.CeleryAppConfig']
+INSTALLED_APPS += ['taskapp.celery.CeleryAppConfig']
 
 if USE_TZ:
     # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-timezone
@@ -300,9 +299,9 @@ ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.accounts.adapters.AccountAdapter'
+ACCOUNT_ADAPTER = 'accounts.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-SOCIALACCOUNT_ADAPTER = '{{cookiecutter.project_slug}}.accounts.adapters.SocialAccountAdapter'
+SOCIALACCOUNT_ADAPTER = 'accounts.adapters.SocialAccountAdapter'
 
 {% if cookiecutter.use_compressor == 'y' -%}
 # django-compressor

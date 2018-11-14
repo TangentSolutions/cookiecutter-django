@@ -1,6 +1,6 @@
 from django.conf import settings
 from django.test import RequestFactory
-from {{ cookiecutter.project_slug }}.accounts.views import UserRedirectView, UserUpdateView
+from accounts.views import UserRedirectView, UserUpdateView
 
 import pytest
 
@@ -41,7 +41,6 @@ class TestUserUpdateView:
 
 
 class TestUserRedirectView:
-
     def test_get_redirect_url(
         self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
     ):
