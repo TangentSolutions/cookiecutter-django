@@ -25,8 +25,8 @@ class SouthAfricaCommonProvider(BaseProvider):
     def cipc_registration_number(self) -> str:
         """Create a fake cipc registration number."""
 
-        company_type = '07'
-        return '{}/{}/{}'.format(
+        company_type = "07"
+        return "{}/{}/{}".format(
             self._get_random_integer(4), self._get_random_integer(6), company_type
         )
 

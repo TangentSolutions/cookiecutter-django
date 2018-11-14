@@ -24,12 +24,12 @@ def table_is_filtered(table, request) -> bool:
     queryparam_set = set()
 
     for key, value in request.GET.items():
-        if value == '':
+        if value == "":
             continue
 
-        queryparam_set.add(key.split('__')[0])
+        queryparam_set.add(key.split("__")[0])
 
-    if 'page' in queryparam_set:
-        queryparam_set.remove('page')
+    if "page" in queryparam_set:
+        queryparam_set.remove("page")
 
     return len(names_set.intersection(queryparam_set)) != 0

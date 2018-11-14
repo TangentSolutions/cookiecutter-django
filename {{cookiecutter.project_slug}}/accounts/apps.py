@@ -3,8 +3,8 @@ from django.apps import AppConfig
 
 class AccountsAppConfig(AppConfig):
 
-    name = 'accounts'
-    verbose_name = 'Accounts'
+    name = "accounts"
+    verbose_name = "Accounts"
 
     def ready(self):
         try:

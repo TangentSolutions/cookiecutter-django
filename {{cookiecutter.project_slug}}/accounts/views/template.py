@@ -13,18 +13,18 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     """Detail view for the user model."""
 
     model = User
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'users/user_detail.html'
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    template_name = "users/user_detail.html"
 
 
 class UserListView(LoginRequiredMixin, ListView):
     """List view for the user model."""
 
     model = User
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    template_name = 'users/user_list.html'
+    slug_field = "username"
+    slug_url_kwarg = "username"
+    template_name = "users/user_list.html"
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -33,7 +33,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UpdateUserDetailForm
     # fields = ['first_name', 'last_name'] # For an auto generated form use fields
-    template_name = 'users/user_form.html'
+    template_name = "users/user_form.html"
 
     def get_success_url(self) -> str:
         """Resolve the user-detail url for the request user.
@@ -43,7 +43,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
         """
 
         return reverse(
-            'accounts:user-detail', kwargs={'username': self.request.user.username}
+            "accounts:user-detail", kwargs={"username": self.request.user.username}
         )
 
     def get_object(self) -> User:
@@ -56,7 +56,7 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
     permanent = False
 
     def get_redirect_url(self):
-        return reverse('showcase:demo')
+        return reverse("showcase:demo")
 
 
 # View functions

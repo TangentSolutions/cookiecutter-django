@@ -24,9 +24,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=False,
-        methods=['GET'],
-        url_name='me',
-        url_path='me',
+        methods=["GET"],
+        url_name="me",
+        url_path="me",
         permission_classes=(
             IsAuthenticated & accounts_permissions.RequestUserIsInstanceUser,
         ),
@@ -43,9 +43,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(
         detail=False,
-        methods=['POST'],
-        url_name='check-username-availability',
-        url_path='check-username-availability',
+        methods=["POST"],
+        url_name="check-username-availability",
+        url_path="check-username-availability",
         serializer_class=accounts_serializers.UsernameAvailabilitySerializer,
         permission_classes=(AllowAny,),
     )
@@ -60,10 +60,10 @@ class UserViewSet(viewsets.ModelViewSet):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        username = serializer.validated_data['username']
+        username = serializer.validated_data["username"]
         response = {
-            'username': username,
-            'available': User.objects.filter(username=username).exists() is False,
+            "username": username,
+            "available": User.objects.filter(username=username).exists() is False,
         }
 
         return Response(response)

@@ -9,7 +9,7 @@ class User(AbstractUser):
     """Custom User model."""
 
     id_number = models.CharField(
-        _('South African identity number of the user'), blank=True, max_length=13
+        _("South African identity number of the user"), blank=True, max_length=13
     )
 
     def get_absolute_url(self, api: bool = False) -> str:
@@ -21,8 +21,8 @@ class User(AbstractUser):
         """
 
         if api:
-            return drf_reverse('accounts-api:user-detail', kwargs={'pk': self.pk})
+            return drf_reverse("accounts-api:user-detail", kwargs={"pk": self.pk})
         else:
             return django_reverse(
-                'accounts:user-detail', kwargs={'username': self.username}
+                "accounts:user-detail", kwargs={"username": self.username}
             )

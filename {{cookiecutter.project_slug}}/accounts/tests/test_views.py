@@ -21,18 +21,18 @@ class TestUserUpdateView:
         self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
     ):
         view = UserUpdateView()
-        request = request_factory.get('/fake-url/')
+        request = request_factory.get("/fake-url/")
         request.user = user
 
         view.request = request
 
-        assert view.get_success_url() == f'/users/{user.username}/'
+        assert view.get_success_url() == f"/users/{user.username}/"
 
     def test_get_object(
         self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
     ):
         view = UserUpdateView()
-        request = request_factory.get('/fake-url/')
+        request = request_factory.get("/fake-url/")
         request.user = user
 
         view.request = request
@@ -45,9 +45,9 @@ class TestUserRedirectView:
         self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
     ):
         view = UserRedirectView()
-        request = request_factory.get('/fake-url')
+        request = request_factory.get("/fake-url")
         request.user = user
 
         view.request = request
 
-        assert view.get_redirect_url() == f'/users/{user.username}/'
+        assert view.get_redirect_url() == f"/users/{user.username}/"

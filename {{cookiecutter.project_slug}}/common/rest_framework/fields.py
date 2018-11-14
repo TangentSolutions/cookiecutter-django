@@ -9,7 +9,7 @@ class LuhnField(fields.CharField):
     This field is useful for validating South Africa ID and VAT numbers.
     """
 
-    default_error_messages = {'invalid_input': 'The value provided is invalid'}
+    default_error_messages = {"invalid_input": "The value provided is invalid"}
 
     def to_internal_value(self, value: str) -> str:
         """Validate the input value using luhn's algorithm."""
@@ -22,6 +22,6 @@ class LuhnField(fields.CharField):
             is_valid = False
 
         if not is_valid:
-            raise serializers.ValidationError(self.error_messages['invalid_input'])
+            raise serializers.ValidationError(self.error_messages["invalid_input"])
 
         return value

@@ -16,17 +16,17 @@ class UsernameAvailabilitySerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     """Django user model serializer."""
 
-    url = serializers.HyperlinkedIdentityField('accounts-api:user-detail')
+    url = serializers.HyperlinkedIdentityField("accounts-api:user-detail")
     id_number = LuhnField(min_length=13, required=False)
 
     class Meta:
         model = User
         fields = (
-            'id',
-            'username',
-            'first_name',
-            'last_name',
-            'id_number',
-            'email',
-            'url',
+            "id",
+            "username",
+            "first_name",
+            "last_name",
+            "id_number",
+            "email",
+            "url",
         )

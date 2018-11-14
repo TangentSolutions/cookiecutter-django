@@ -15,7 +15,7 @@ class UpdateUserDetailForm(ModelForm):
 
     class Meta:
         model = User
-        fields = ('first_name', 'last_name', 'id_number')
+        fields = ("first_name", "last_name", "id_number")
 
 
 class UserChangeForm(forms.UserChangeForm):
@@ -31,7 +31,7 @@ class UserCreationForm(forms.UserCreationForm):
     """Custom form for the admin interface to create users."""
 
     error_message = forms.UserCreationForm.error_messages.update(
-        {'duplicate_username': _('This username has already been taken.')}
+        {"duplicate_username": _("This username has already been taken.")}
     )
 
     class Meta(forms.UserCreationForm.Meta):
@@ -40,11 +40,11 @@ class UserCreationForm(forms.UserCreationForm):
     def clean_username(self) -> str:
         """Validate the username to ensure it is unique."""
 
-        username = self.cleaned_data['username']
+        username = self.cleaned_data["username"]
 
         try:
             User.objects.get(username=username)
         except User.DoesNotExist:
             return username
 
-        raise ValidationError(self.error_messages['duplicate_username'])
+        raise ValidationError(self.error_messages["duplicate_username"])

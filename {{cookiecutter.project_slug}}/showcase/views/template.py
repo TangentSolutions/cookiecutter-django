@@ -17,7 +17,7 @@ class ShowcaseDemoView(LoginRequiredMixin, ExportMixin, SingleTableMixin, Filter
     """Demo view showcasing tables, filters and export."""
 
     model = User
-    template_name = 'showcase/table.html'
+    template_name = "showcase/table.html"
     table_class = UserTable
     filterset_class = UserFilterSet
     paginate_by = 5
@@ -39,10 +39,10 @@ class ShowcaseDemoViewPrintView(
     """Print as PDF view for the ShowcaseDemoView."""
 
     model = User
-    template_name = 'showcase/table_pdf.html'
+    template_name = "showcase/table_pdf.html"
     table_class = UserTablePdf
     table_pagination = False
-    pdf_stylesheets = [str(settings.ROOT_DIR.path('static')) + '/css/bootstrap.min.css']
+    pdf_stylesheets = [str(settings.ROOT_DIR.path("static")) + "/css/bootstrap.min.css"]
 
 
 # View functions

@@ -10,12 +10,12 @@ import factory
 class UserFactory(DjangoModelFactory):
     """Django user factory for testing purposes."""
 
-    username = factory.Faker('user_name')
-    email = factory.Faker('email')
+    username = factory.Faker("user_name")
+    email = factory.Faker("email")
 
     class Meta:
         model = get_user_model()
-        django_get_or_create = ['username']
+        django_get_or_create = ["username"]
 
     @factory.lazy_attribute
     def id_number(self) -> str:
@@ -32,7 +32,7 @@ class UserFactory(DjangoModelFactory):
         """
 
         password = Faker(
-            'password',
+            "password",
             length=42,
             special_chars=True,
             digits=True,

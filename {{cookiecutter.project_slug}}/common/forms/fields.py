@@ -11,7 +11,7 @@ class LuhnField(forms.CharField):
     South Africa ID and VAT numbers.
     """
 
-    default_error_messages = {'invalid_input': 'The value provided is invalid'}
+    default_error_messages = {"invalid_input": "The value provided is invalid"}
 
     def validate(self, value: str) -> None:
         """Validate the field using luhn's algorithm."""
@@ -24,7 +24,7 @@ class LuhnField(forms.CharField):
             is_valid = False
 
         if not is_valid:
-            raise forms.ValidationError(self.error_messages['invalid_input'])
+            raise forms.ValidationError(self.error_messages["invalid_input"])
 
 
 class CompanyRegistrationNumberField(forms.CharField):
@@ -45,7 +45,7 @@ class CompanyRegistrationNumberField(forms.CharField):
     """
 
     default_error_messages = {
-        'invalid_input': r'The registration number provided does not match the format \'\d{4}/\d{6}/\d{2}\''
+        "invalid_input": r"The registration number provided does not match the format \'\d{4}/\d{6}/\d{2}\'"
     }
 
     def validate(self, value: str) -> None:
@@ -59,4 +59,4 @@ class CompanyRegistrationNumberField(forms.CharField):
             is_valid = False
 
         if not is_valid:
-            raise forms.ValidationError(self.error_messages['invalid_input'])
+            raise forms.ValidationError(self.error_messages["invalid_input"])

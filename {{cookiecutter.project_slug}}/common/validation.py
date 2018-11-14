@@ -1,7 +1,7 @@
 import re
 
 
-CIPC_COMPANY_CHOICES = ('07', 'Private company')
+CIPC_COMPANY_CHOICES = ("07", "Private company")
 CIPC_COMPANY_CODES = (code for code, description in CIPC_COMPANY_CHOICES)
 
 
@@ -19,10 +19,10 @@ def append_check_digit_luhn_algorithm(value: str) -> bool:
     """
 
     if not isinstance(value, str):
-        raise TypeError(f'unsupported type for value \'{type(value)}\'')
+        raise TypeError(f"unsupported type for value '{type(value)}'")
 
     if not value.isdigit():
-        raise ValueError(f'invalid value for validation check \'{value}\'')
+        raise ValueError(f"invalid value for validation check '{value}'")
 
     digit_list = []
     for index, digit in enumerate(value[::-1]):
@@ -40,7 +40,7 @@ def append_check_digit_luhn_algorithm(value: str) -> bool:
         digit_list.append(cdigit)
 
     check_digit = (sum(digit_list) * 9) % 10
-    return f'{value}{check_digit}'
+    return f"{value}{check_digit}"
 
 
 def is_valid_luhn_algorithm(value: str) -> bool:
@@ -58,10 +58,10 @@ def is_valid_luhn_algorithm(value: str) -> bool:
     """
 
     if not isinstance(value, str):
-        raise TypeError(f'unsupported type for value \'{type(value)}\'')
+        raise TypeError(f"unsupported type for value '{type(value)}'")
 
     if not value.isdigit():
-        raise ValueError(f'invalid value for validation check \'{value}\'')
+        raise ValueError(f"invalid value for validation check '{value}'")
 
     digit_list = []
     for index, digit in enumerate(value[::-1], start=1):
@@ -90,9 +90,9 @@ def is_valid_cipc_registration_number(value: str) -> bool:
     """
 
     if not isinstance(value, str):
-        raise TypeError(f'unsupported type for value \'{type(value)}\'')
+        raise TypeError(f"unsupported type for value '{type(value)}'")
 
-    pattern = re.compile(r'\d{4}/\d{6}/\d{2}')
+    pattern = re.compile(r"\d{4}/\d{6}/\d{2}")
     conds = [
         len(value) != 14,
         pattern.match(value) is None,
