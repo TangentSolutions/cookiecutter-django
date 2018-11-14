@@ -14,7 +14,7 @@ $ python -m venv env
 $ source env/bin/activate
 
 $ pip install --upgrade pip
-$ pip install cookiecutter
+$ pip install cookiecutter pumpversion
 $ cookiecutter https://github.com/TangentSolutions/cookiecutter-django
 ```
 
