@@ -79,7 +79,11 @@ THIRD_PARTY_APPS = [
 {% endif %}
 
 {% if cookiecutter.pdf_plugin == 'y' -%}
-    'django_weasyprint'
+    'django_weasyprint',
+{% endif %}
+
+{% if cookiecutter.use_graphql == 'y' -%}
+    'graphene_django',
 {% endif %}
 ]
 

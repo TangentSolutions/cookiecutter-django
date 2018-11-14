@@ -4,6 +4,8 @@ from rest_framework.routers import SimpleRouter
 from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
+from graphene_django.views import GraphQLView
+from {{cookiecutter.project_slug}}.accounts.schema import schema
 from {{cookiecutter.project_slug}}.accounts.views.api import UserViewSet
 from {{cookiecutter.project_slug}}.accounts.views.template import (
     user_list_view,
@@ -43,8 +45,13 @@ class APIRoot(APIView):
 
 # API url patterns
 api_root = APIRoot.as_view()
-api_urlpatterns = [path('', api_root, name='api-root'), path('', include(router.urls))]
+graphql_view = GraphQLView.as_view(schema=schema, graphiql=True)
 
+api_urlpatterns = [
+    path('', api_root, name='api-root'),
+    path('', include(router.urls)),
+    path('graphiql', graphql_view, name='graphiql'),
+]
 
 # Template based url patterns
 urlpatterns = [
