@@ -24,6 +24,7 @@ services:
       - "{{cookiecutter.development_port}}:{{cookiecutter.development_port}}"
       - "1986:1986"
     command: /start
+    restart: always
 
   postgres:
     build:
