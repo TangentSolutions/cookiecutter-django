@@ -55,7 +55,7 @@ class CompanyRegistrationNumberField(forms.CharField):
 
         try:
             is_valid = is_valid_cipc_registration_number(value)
-        except (TypeError, ValueError):
+        except TypeError:
             is_valid = False
 
         if not is_valid:
