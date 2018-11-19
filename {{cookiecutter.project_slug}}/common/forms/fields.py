@@ -20,7 +20,7 @@ class LuhnField(forms.CharField):
 
         try:
             is_valid = is_valid_luhn_algorithm(value)
-        except (TypeError, ValueError):
+        except ValueError:
             is_valid = False
 
         if not is_valid:
@@ -51,12 +51,9 @@ class CompanyRegistrationNumberField(forms.CharField):
     def validate(self, value: str) -> None:
         """Validate the field using the is_valid_cipc_registration_number helper function."""
 
-        super().validate(value)
+        super().validate(value)  # Will raise an error if not str
 
-        try:
-            is_valid = is_valid_cipc_registration_number(value)
-        except (TypeError, ValueError):
-            is_valid = False
+        is_valid = is_valid_cipc_registration_number(value)
 
         if not is_valid:
             raise forms.ValidationError(self.error_messages["invalid_input"])

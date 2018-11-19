@@ -1,3 +1,4 @@
+from typing import Dict
 from django.urls import path, include
 from rest_framework.reverse import reverse
 from rest_framework.routers import SimpleRouter
@@ -16,6 +17,8 @@ from accounts.views.template import (
     user_detail_view,
 )
 
+from common.views.api import APIRootBaseView
+
 
 app_name = 'accounts'
 
@@ -25,28 +28,24 @@ router = SimpleRouter()
 router.register('users', UserViewSet, basename='user')
 
 
-class APIRoot(APIView):
+class APIRootView(APIRootBaseView):
     """Root API view for the users module."""
 
-    def get(self, request: Request) -> Response:
-        """Provides the routes available under the users module.
-
-        Returns:
-            A DRF response containing hyperlinks to the available routes.
-        """
-
+    @staticmethod
+    def get_routes(request: Request) -> Dict:
         routes = {
-            'users': reverse('accounts-api:user-list', request=request),
-            'check-username-availability': reverse(
-                'accounts-api:user-check-username-availability', request=request
+            "users": reverse("accounts-api:user-list", request=request),
+            "me": reverse("accounts-api:user-me", request=request),
+            "check-username-availability": reverse(
+                "accounts-api:user-check-username-availability", request=request
             ),
         }
 
-        return Response(routes)
+        return routes
 
 
 # API url patterns
-api_root = APIRoot.as_view()
+api_root = APIRootView.as_view()
 {% if cookiecutter.use_graphql == "y" -%}
 graphql_view = GraphQLView.as_view(schema=schema, graphiql=True)
 {% endif -%}

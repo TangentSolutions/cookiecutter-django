@@ -9,15 +9,16 @@ psycopg2==2.7.4 --no-binary psycopg2
 
 # Utilities
 black
-bumpversion
 ipython
 
 # Testing
 # ------------------------------------------------------------------------------
 mypy==0.641
 pytest==3.9.3
+pytest-cov==2.6.0
 pytest-sugar==0.9.1
 freezegun==0.3.11
+web-pdb==1.4.3
 
 # Code quality
 # ------------------------------------------------------------------------------
