@@ -166,6 +166,8 @@ def apply_initial_black_formatting():
     """Applies the black formatter to the project."""
 
     try:
+        print(INFO + "Applying black formatting" + TERMINATOR)
+
         process = subprocess.Popen(["black", ".", "-S", "--line-length=120"])
         process.wait()
     except:
