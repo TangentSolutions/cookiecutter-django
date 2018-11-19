@@ -21,9 +21,9 @@ class TestAPIRootBaseView:
         view.request = request
 
         with pytest.raises(NotImplementedError):
-            routes = view.get_routes(request)
+            view.get_routes(request)
 
-    def test_get_routes_raises(
+    def test_response(
         self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
     ):
 

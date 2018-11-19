@@ -2,44 +2,33 @@ from django.conf import settings
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from rest_framework.reverse import reverse
-from rest_framework.views import APIView
 from rest_framework.request import Request
-from rest_framework.response import Response
+from common.views.api import APIRootBaseView
+from typing import Dict
 
 import accounts.urls
 
 
 # Root view for all API endpoints
-class APIRoot(APIView):
+class APIRootView(APIRootBaseView):
     """Root view for all API based views in all applications."""
 
-    def get(self, request: Request) -> Response:
-        """Generate a mapping of url names to urls for the APIs within
-        the application.
+    @staticmethod
+    def get_routes(request: Request) -> Dict:
+        """Generate a dict of routes the root api views of each application."""
 
-        Args:
-            request: A DRF request instance
-
-        Returns:
-            A response containing the names and urls for the root apis of each
-            application.
-        """
-
-        routes = {"accounts": reverse("accounts-api:api-root", request=request)}
-
-        return Response(routes)
+        return {"accounts": reverse("accounts-api:api-root", request=request)}
 
 
-api_root = APIRoot.as_view()
+api_root_view = APIRootView.as_view()
 
 
 # DRF urlpatterns
 api_urlpatterns = [
     path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
-    path("api/", api_root, name="api-root"),
+    path("api/", api_root_view, name="api-root"),
     path(
         "api/accounts/",
         include((accounts.urls.api_urlpatterns, "accounts"), namespace="accounts-api"),
