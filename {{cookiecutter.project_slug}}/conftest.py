@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.test import RequestFactory
 from accounts.tests.factories import UserFactory
-
+from faker import Faker
 
 import pytest
 
@@ -12,14 +12,26 @@ def media_storage(settings, tmpdir):
 
 
 @pytest.fixture
+def faker() -> Faker:
+    """Pytest fixture to inject an instance of the Faker object.
+
+    Usage:
+        def test_feature(faker):
+            first_name = faker.first_name()
+    """
+
+    return Faker()
+
+
+@pytest.fixture
 def user() -> settings.AUTH_USER_MODEL:
     """Pytest user fixture which can be injected into test cases.
 
-	Usage:
+    Usage:
 
-		def test_user(user):
-			assert user.username is not None
-	"""
+        def test_user(user):
+            assert user.username is not None
+    """
 
     return UserFactory()
 
@@ -28,10 +40,10 @@ def user() -> settings.AUTH_USER_MODEL:
 def request_factory() -> RequestFactory:
     """Pytest fixture which injects a django request factory instance.
 
-	Usage:
-		def test_user_view(request_factory):
-			response = request_factory.get(reverse('accounts:user-detail'))
-			assert response.status_code == 200
-	"""
+    Usage:
+        def test_user_view(request_factory):
+            response = request_factory.get(reverse('accounts:user-detail'))
+            assert response.status_code == 200
+    """
 
     return RequestFactory()

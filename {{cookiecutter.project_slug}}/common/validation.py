@@ -1,8 +1,8 @@
 import re
 
 
-CIPC_COMPANY_CHOICES = ("07", "Private company")
-CIPC_COMPANY_CODES = (code for code, description in CIPC_COMPANY_CHOICES)
+CIPC_COMPANY_CHOICES = [("07", "Private company")]
+CIPC_COMPANY_CODES = (code for (code, description) in CIPC_COMPANY_CHOICES)
 
 
 def append_check_digit_luhn_algorithm(value: str) -> bool:
@@ -92,11 +92,13 @@ def is_valid_cipc_registration_number(value: str) -> bool:
     if not isinstance(value, str):
         raise TypeError(f"unsupported type for value '{type(value)}'")
 
-    pattern = re.compile(r"\d{4}/\d{6}/\d{2}")
-    conds = [
-        len(value) != 14,
-        pattern.match(value) is None,
-        value not in CIPC_COMPANY_CODES,
-    ]
+    pattern = re.compile(r"\d{4}/\d{6}/(?P<company_type_code>\d{2})")
+    match = pattern.match(value)
 
-    return any(conds)
+    if len(value) != 14:
+        return False
+
+    if match is None:
+        return False
+
+    return match.groupdict()['company_type_code'] in CIPC_COMPANY_CODES

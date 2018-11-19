@@ -14,7 +14,7 @@ class SouthAfricaCommonProvider(BaseProvider):
     def _get_random_integer(n: int) -> int:
         """Generate a random int of length n."""
 
-        return random.randint(10 ** n - 1, 10 ** n)
+        return random.randrange(10 ** (n - 1), 10 ** n)
 
     def id_number(self) -> str:
         """Create a fake id number."""
