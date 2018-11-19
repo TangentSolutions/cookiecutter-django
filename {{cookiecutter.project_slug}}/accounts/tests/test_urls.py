@@ -59,20 +59,6 @@ class TestApiRootView:
             "accounts-api:user-check-username-availability", request=request
         )
 
-    def test_api_root_get(
-        self, user: settings.AUTH_USER_MODEL, request_factory: RequestFactory
-    ):
-        """Ensure the api root view produces the required hyperlinks."""
-
-        view = APIRootView()
-        url = drf_reverse("accounts-api:api-root")
-        request = request_factory.get(url)
-        request.user = user
-
-        view.request = request
-        response = view.get(request)
-        assert isinstance(response, Response)
-
 
 def test_api_user_list():
     assert drf_reverse("accounts-api:user-list") == "/api/accounts/users/"

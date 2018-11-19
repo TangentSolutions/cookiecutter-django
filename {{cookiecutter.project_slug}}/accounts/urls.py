@@ -17,6 +17,8 @@ from accounts.views.template import (
     user_detail_view,
 )
 
+from common.views.api import APIRootBaseView
+
 
 app_name = 'accounts'
 
@@ -26,7 +28,7 @@ router = SimpleRouter()
 router.register('users', UserViewSet, basename='user')
 
 
-class APIRootView(APIView):
+class APIRootView(APIRootBaseView):
     """Root API view for the users module."""
 
     @staticmethod
@@ -39,17 +41,6 @@ class APIRootView(APIView):
         }
 
         return routes
-
-    def get(self, request: Request) -> Response:
-        """Provides the routes available under the users module.
-
-        Returns:
-            A DRF response containing hyperlinks to the available routes.
-        """
-
-        routes = self.get_routes(request)
-        return Response(routes)
-
 
 # API url patterns
 api_root = APIRootView.as_view()
