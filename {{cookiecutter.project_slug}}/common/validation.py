@@ -2,7 +2,7 @@ import re
 
 
 CIPC_COMPANY_CHOICES = [("07", "Private company")]
-CIPC_COMPANY_CODES = (code for (code, description) in CIPC_COMPANY_CHOICES)
+CIPC_COMPANY_CODES = [code for (code, description) in CIPC_COMPANY_CHOICES]
 
 
 def append_check_digit_luhn_algorithm(value: str) -> bool:
@@ -101,4 +101,4 @@ def is_valid_cipc_registration_number(value: str) -> bool:
     if match is None:
         return False
 
-    return match.groupdict()['company_type_code'] in CIPC_COMPANY_CODES
+    return match.groupdict()["company_type_code"] in CIPC_COMPANY_CODES
