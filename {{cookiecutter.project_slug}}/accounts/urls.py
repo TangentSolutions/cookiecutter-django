@@ -35,12 +35,14 @@ class APIRootView(APIRootBaseView):
     def get_routes(request: Request) -> Dict:
         routes = {
             "users": reverse("accounts-api:user-list", request=request),
+            "me": reverse("accounts-api:user-me", request=request),
             "check-username-availability": reverse(
                 "accounts-api:user-check-username-availability", request=request
             ),
         }
 
         return routes
+
 
 # API url patterns
 api_root = APIRootView.as_view()

@@ -28,8 +28,7 @@ class UserFactory(DjangoModelFactory):
 
     @post_generation
     def password(self, create: bool, extracted: Sequence[Any], **kwargs) -> None:
-        """Post generation hook to set the user's password.
-        """
+        """Post generation hook to set the user's password."""
 
         password = factory.Faker(
             "password",
@@ -39,4 +38,5 @@ class UserFactory(DjangoModelFactory):
             upper_case=True,
             lower_case=True,
         ).generate(extra_kwargs={})
+
         self.set_password(password)

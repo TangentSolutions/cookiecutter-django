@@ -3,7 +3,6 @@ from django.test import RequestFactory
 from django.urls import resolve
 from django.urls import reverse as django_reverse
 from rest_framework.reverse import reverse as drf_reverse
-from rest_framework.response import Response
 from accounts.urls import APIRootView
 
 import pytest
@@ -76,3 +75,7 @@ def test_api_username_available():
         drf_reverse("accounts-api:user-check-username-availability")
         == "/api/accounts/users/check-username-availability/"
     )
+
+
+def test_api_me():
+    assert drf_reverse("accounts-api:user-me") == "/api/accounts/users/me/"
