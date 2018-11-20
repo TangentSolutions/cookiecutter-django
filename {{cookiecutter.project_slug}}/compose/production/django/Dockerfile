@@ -1,18 +1,19 @@
-FROM python:3.6-alpine
-
+{%- if cookiecutter.python_version == "3.6" %}
+FROM python:3.6.7
+{% elif cookiecutter.python_version == "3.7" %}
+FROM python:3.7
+{% endif -%}
 ENV PYTHONUNBUFFERED 1
 
-RUN apk update \
-  # psycopg2 dependencies
-  && apk add --virtual build-deps gcc python3-dev musl-dev \
-  && apk add postgresql-dev \
-  # Pillow dependencies
-  && apk add jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev \
-  # CFFI dependencies
-  && apk add libffi-dev py-cffi
+RUN apt-get update && apt-get -y install apt-utils libsass-dev
+{%- if cookiecutter.pdf_plugin == "y" %}
+RUN apt-get -y install libcairo2 libpango-1.0-0 \
+	libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
+	libffi-dev shared-mime-info
+{%- endif %}
 
-RUN addgroup -S django \
-    && adduser -S -G django django
+RUN groupadd django
+RUN useradd django -g django
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements /requirements
