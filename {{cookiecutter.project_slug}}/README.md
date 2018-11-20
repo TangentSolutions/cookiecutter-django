@@ -17,10 +17,9 @@ $ mypy {{cookiecutter.project_slug}}
 To run the tests, check your test coverage, and generate an HTML coverage report::
 
 ```bash
-$ pytest
-  $ coverage run -m pytest
-  $ coverage html
-  $ open htmlcov/index.html
+$ docker-compose -f local.yml run --rm django pytest
+$ docker-compose -f local.yml run --rm django py.test --cov=. --cov-report=html
+$ open htmlcov/index.html
 ```
 
 {% if cookiecutter.use_celery == "y" %}

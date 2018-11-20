@@ -27,9 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
         methods=["GET"],
         url_name="me",
         url_path="me",
-        permission_classes=(
-            IsAuthenticated & accounts_permissions.RequestUserIsInstanceUser,
-        ),
+        permission_classes=(IsAuthenticated,),
     )
     def me(self, request: Request) -> Response:
         """Return the user instance for the request user.

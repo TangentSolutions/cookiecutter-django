@@ -155,17 +155,19 @@ def add_black_formatter_git_hook():
     initialize_repo()
 
     # Ensure the pre commit hook is executable
-    process = subprocess.Popen(["chmod", "+x", "git-hooks/pre-commit"])
+    process = subprocess.Popen(["chmod", "+x", "Git-Hooks/Python/pre-commit"])
     process.wait()
 
     # Copy the pre commit hook
-    shutil.copy("git-hooks/pre-commit", ".git/hooks/pre-commit")
+    shutil.copy("Git-Hooks/Python/pre-commit", ".git/hooks/pre-commit")
 
 
 def apply_initial_black_formatting():
     """Applies the black formatter to the project."""
 
     try:
+        print(INFO + "Applying black formatting" + TERMINATOR)
+
         process = subprocess.Popen(["black", ".", "-S", "--line-length=120"])
         process.wait()
     except:
@@ -189,7 +191,7 @@ def remove_celery_compose_dirs():
 def remove_git_hooks_directory():
     """Remove the git hooks directory."""
 
-    shutil.rmtree(os.path.join("git-hooks"))
+    shutil.rmtree(os.path.join("Git-Hooks"))
 
 
 def remove_copy_bootstrap_file():

@@ -6,6 +6,7 @@
   "email": "{{ cookiecutter.author_name.lower()|replace(' ', '.') }}@example.com",
   "version": "0.1.0",
   "python_version": ["3.6", "3.7"],
+  "development_port": "8080",
   "timezone": ["Africa/Johannesburg", "UTC"],
   "windows": "n",
   "use_pycharm": "n",

@@ -21,10 +21,7 @@ class RequestUserIsInstanceUser(permissions.BasePermission):
         """
 
         if not isinstance(instance, User):
-            message = (
-                f"'{self.__class__}' is only applicable to "
-                " api views which make use of the User model."
-            )
+            message = f"'{self.__class__}' is only applicable to api views which make use of the User model."
 
             raise TypeError(message)
 

@@ -14,7 +14,7 @@ $ python -m venv env
 $ source env/bin/activate
 
 $ pip install --upgrade pip
-$ pip install cookiecutter pumpversion
+$ pip install cookiecutter bumpversion
 $ cookiecutter https://github.com/TangentSolutions/cookiecutter-django
 ```
 
@@ -61,7 +61,12 @@ class UserTable(django_tables2.Table):
     export_formats = ('csv', 'json', 'latex', 'ods', 'tsv', 'xls', 'xlsx', 'yml')
 ```
 
-TODO:
+# Known Issues
+
+1. libcairo2 is required by weasyprint for pdf generation and is installed during the docker build. Currently the version of cairo installed triggers a user warning
+related to svg images for versions < 1.15.4. At this time a newer version is not available to install via apt-get and would require downloading the source (+- 100mb) and building it. This has not been done since pdf generation is working correctly in spite of the user warning.
+
+## To Do:
 
 - [ ] Add django channels support
 	- [ ] Investigate using a reverse proxy within container
@@ -73,3 +78,8 @@ TODO:
 - [ ] Restructure project structure to standard django structure
 - [ ] Tests
 - [ ] Install cairo for weasy print
+- [x] Specify port in docker compose
+- [x] Use python 3.6.7
+- [ ] Update gitignore in post hook
+- [x] Update bumpversion config
+- [ ] Tests run on sqlite
