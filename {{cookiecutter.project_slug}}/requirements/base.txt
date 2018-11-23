@@ -32,7 +32,7 @@ django-redis==4.9.0
 django-filter==2.0.0
 django-tables2==2.0.2
 tablib==0.12.1
-{%- if cookiecutter.pdf_plugin %}
+{%- if cookiecutter.pdf_plugin == 'y' %}
 # xhtml2pdf==0.2.2
 django-weasyprint==0.5.4
 {%- endif %}
