@@ -39,6 +39,7 @@ django-weasyprint==0.5.4
 
 # Django REST Framework
 djangorestframework==3.9.0
+django-cors-headers==2.4.0
 coreapi==2.3.3
 
 # GraphQL
