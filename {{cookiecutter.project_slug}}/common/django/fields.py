@@ -1,4 +1,5 @@
 from django import forms
+from crispy_forms.layout import Field
 from common.validation import is_valid_luhn_algorithm, is_valid_cipc_registration_number
 
 
@@ -60,3 +61,12 @@ class CompanyRegistrationNumberField(forms.CharField):
 
         if not is_valid:
             raise forms.ValidationError(self.error_messages["invalid_input"])
+
+
+class CustomCheckbox(Field):
+    """Custom checkbox field which makes use of the bootstrap custom forms.
+
+    https://getbootstrap.com/docs/4.0/components/forms/#custom-forms.
+    """
+
+    template = "crispy_forms/custom_checkbox.html"

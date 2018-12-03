@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model, forms
 from django.forms import ModelForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
-from common.forms.fields import LuhnField
+from common.django.fields import LuhnField
 
 
 User = get_user_model()

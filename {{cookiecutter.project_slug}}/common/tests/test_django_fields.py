@@ -1,5 +1,5 @@
 from django.forms import ValidationError
-from common.forms.fields import LuhnField, CompanyRegistrationNumberField
+from common.django.fields import LuhnField, CompanyRegistrationNumberField
 
 import pytest
 
