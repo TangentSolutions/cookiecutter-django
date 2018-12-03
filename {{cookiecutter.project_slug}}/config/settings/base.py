@@ -89,6 +89,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'showcase.apps.ShowcaseAppConfig',
     'accounts.apps.AccountsAppConfig',
+    'common.apps.CommonAppConfig',
     # Your stuff: custom apps go here
 ]
 
