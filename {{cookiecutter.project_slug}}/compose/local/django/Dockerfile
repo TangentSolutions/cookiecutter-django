@@ -1,7 +1,7 @@
 {%- if cookiecutter.python_version == "3.6" %}
-FROM python:3.6.7
+FROM python:3.6.8
 {% elif cookiecutter.python_version == "3.7" %}
-FROM python:3.7
+FROM python:3.7.2
 {% endif -%}
 
 ENV PYTHONUNBUFFERED 1
