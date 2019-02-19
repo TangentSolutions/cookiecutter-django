@@ -34,27 +34,26 @@
     {% endraw -%}
 
     {% raw -%}
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <script src="{% static 'js/jquery.min.js' %}" defer></script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}" defer></script>
     {%- endraw %}
+
+    {%- if cookiecutter.use_sass_preprocessor == 'y' -%}
+    {% raw -%}
+    <link href="{% sass_src 'sass/project.scss' %}" rel="stylesheet">
+    {%- endraw %}
+    {% else %}
+    {% raw -%}
+    <link href="{% static 'css/project.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    {%- endraw %}
+    {%- endif %}
 
     {% raw -%}
     {% block css %}
     {%- endraw %}
       {% if cookiecutter.use_compressor == "y" -%}{% raw %}{% compress css %}{% endraw %}{%- endif %}
         <!-- This file stores project-specific CSS -->
-
-      {%- if cookiecutter.use_sass_preprocessor == 'y' -%}
-      {% raw -%}
-      <link href="{% sass_src 'sass/project.scss' %}" rel="stylesheet">
-      {%- endraw %}
-      {% else %}
-      {% raw -%}
-      <link href="{% static 'css/project.css' %}" rel="stylesheet">
-      {%- endraw %}
-      {%- endif %}
-
       {%- if cookiecutter.use_compressor == "y" -%}{% raw %}{% endcompress %}{% endraw %}{%- endif %}
     {% raw -%}
     {% endblock %}
