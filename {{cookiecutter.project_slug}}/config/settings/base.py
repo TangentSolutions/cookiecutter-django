@@ -70,7 +70,6 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'rest_framework',
     'django_tables2',
     'django_filters',
@@ -209,7 +208,9 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    {% if cookiecutter.use_sass_preprocessor == 'y' -%}
     'sass_processor.finders.CssFinder',
+    {% endif %}
 ]
 
 # MEDIA

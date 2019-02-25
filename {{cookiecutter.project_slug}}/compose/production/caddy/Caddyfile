@@ -7,7 +7,7 @@ www.{% raw %}{$DOMAIN_NAME}{% endraw %} {
 
     proxy / django:8000 {
     	transparent
-		{%- if cookiecutter.channels == 'y' %}
+		{%- if cookiecutter.use_channels == 'y' %}
 		websocket
 		{%- endif %}
     	except /static

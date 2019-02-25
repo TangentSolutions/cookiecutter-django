@@ -87,11 +87,14 @@
                   {% endfor %}
                 </div>
               {% endif %}
-                <a
-                  href="{% url 'showcase:demo-pdf' %}"
-                  class="btn btn-primary ml-1 rounded">
-                  PDF
-                </a>
+
+                {%- if cookiecutter.pdf_plugin == 'y' %}
+                  <a
+                    href="{% url 'showcase:demo-pdf' %}"
+                    class="btn btn-primary ml-1 rounded">
+                    PDF
+                  </a>
+                {%- endif %}
               </div>
             </div>
           </div>
