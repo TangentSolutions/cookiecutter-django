@@ -1,13 +1,13 @@
 # General
 USE_DOCKER=yes
 IPYTHONDIR=/app/.ipython
-PYTHONBREAKPOINT="web_pdb.set_trace"
 
 # Redis
 REDIS_URL=redis://redis:6379/0
 
-{% if cookiecutter.use_celery == 'y' %}
+{%- if cookiecutter.use_celery == 'y' %}
 # Celery & Flower
+CELERY_RUN_TASKS_SYNC=False
 CELERY_FLOWER_USER=!!!SET CELERY_FLOWER_USER!!!
 CELERY_FLOWER_PASSWORD=!!!SET CELERY_FLOWER_PASSWORD!!!
 {% endif %}

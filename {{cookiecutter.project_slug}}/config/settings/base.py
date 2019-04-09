@@ -20,7 +20,7 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool('DJANGO_DEBUG', False)
+DEBUG = env.bool("DJANGO_DEBUG", False)
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     'django_filters',
 {% if cookiecutter.use_sass_preprocessor == 'y' -%}
     'sass_processor',
+    'compressor',
 {% endif %}
 
 {% if cookiecutter.pdf_plugin == 'y' -%}
@@ -121,7 +122,10 @@ INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 {% if cookiecutter.use_sass_preprocessor == 'y' -%}
 # Sass preprocessor
-SASS_PROCESSOR_INCLUDE_DIRS = [os.path.join(ROOT_DIR, 'node_modules/bootstrap')]
+SASS_PRECISION = 8
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(ROOT_DIR, "static/sass/bootstrap"),
+]
 {%- endif %}
 
 # MIGRATIONS
@@ -184,15 +188,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-
-{% if cookiecutter.use_whitenoise == 'y' -%}
-# WhiteNoise
-# ------------------------------------------------------------------------------
-# http://whitenoise.evans.io/en/latest/django.html#enable-whitenoise
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')  # noqa F405
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-{%- endif %}
 
 # STATIC
 # ------------------------------------------------------------------------------
@@ -323,13 +318,5 @@ ACCOUNT_ADAPTER = 'accounts.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = 'accounts.adapters.SocialAccountAdapter'
 
-{% if cookiecutter.use_compressor == 'y' -%}
-# django-compressor
-# ------------------------------------------------------------------------------
-# https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
-INSTALLED_APPS += ['compressor']
-STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']
-
-{%- endif %}
 # Your stuff...
 # ------------------------------------------------------------------------------

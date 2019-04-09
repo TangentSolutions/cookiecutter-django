@@ -1,22 +1,25 @@
 {%- if cookiecutter.python_version == "3.6" %}
 FROM python:3.6.8
 {% elif cookiecutter.python_version == "3.7" %}
-FROM python:3.7.2
+FROM python:3.7.3
 {% endif -%}
 
 ENV PYTHONUNBUFFERED 1
 
-RUN apt-get update && apt-get -y install apt-utils libsass-dev
+RUN apt-get update
+RUN apt-get -y install \
+	libsass-dev \
 {%- if cookiecutter.pdf_plugin == "y" %}
-RUN apt-get -y install libcairo2 libpango-1.0-0 \
+	libcairo2 libpango-1.0-0 \
 	libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
 	libffi-dev shared-mime-info
 {%- endif %}
 
 # Requirements are installed here to ensure they will be cached.
-RUN pip install --upgrade pip
-COPY ./requirements /requirements
-RUN pip install -r /requirements/local.txt
+RUN pip install --upgrade pip poetry
+COPY ./pyproject.toml /pyproject.toml
+RUN poetry lock
+RUN poetry install
 
 COPY ./compose/production/django/entrypoint /entrypoint
 RUN sed -i 's/\r//' /entrypoint
