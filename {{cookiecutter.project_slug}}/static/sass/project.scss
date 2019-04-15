@@ -1,6 +1,6 @@
-{%- if cookiecutter.use_sass_preprocessor == 'y' %}
+{% if cookiecutter.use_sass_preprocessor == 'y' -%}
 @import "custom_vars";
-@import "node_modules/bootstrap/scss/bootstrap";
+@import "bootstrap";
 {%- endif %}
 
 img.invert {
@@ -10,6 +10,7 @@ img.invert {
 
 #filter-collapse {
   color: $gray-600;
+  outline: none;
   text-decoration: none;
 }
 

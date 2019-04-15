@@ -13,24 +13,11 @@ DJANGO_SECURE_SSL_REDIRECT=False
 
 # Email
 # ------------------------------------------------------------------------------
-MAILGUN_API_KEY=
-DJANGO_SERVER_EMAIL=
-MAILGUN_DOMAIN=
-
-# AWS
-# ------------------------------------------------------------------------------
-DJANGO_AWS_ACCESS_KEY_ID=
-DJANGO_AWS_SECRET_ACCESS_KEY=
-DJANGO_AWS_STORAGE_BUCKET_NAME=
 
 # django-allauth
 # ------------------------------------------------------------------------------
 DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
-{% if cookiecutter.use_compressor == 'y' %}
-# django-compressor
-# ------------------------------------------------------------------------------
-COMPRESS_ENABLED=
-{% endif %}
+
 # Gunicorn
 # ------------------------------------------------------------------------------
 WEB_CONCURRENCY=4

@@ -74,7 +74,7 @@ def generate_random_user():
 def generate_postgres_user(debug=False):
     """Generate a random username for the postgres instance."""
 
-    return DEBUG_VALUE if debug else generate_random_user()
+    return generate_random_user()
 
 
 def set_postgres_user(file_path, value):
@@ -115,22 +115,14 @@ def set_flags_in_envs(postgres_user, celery_flower_user, debug=False):
     set_django_admin_url(production_django_envs_path)
 
     set_postgres_user(local_postgres_envs_path, value=postgres_user)
-    set_postgres_password(
-        local_postgres_envs_path, value=DEBUG_VALUE if debug else None
-    )
+    set_postgres_password(local_postgres_envs_path, value=None)
     set_postgres_user(production_postgres_envs_path, value=postgres_user)
-    set_postgres_password(
-        production_postgres_envs_path, value=DEBUG_VALUE if debug else None
-    )
+    set_postgres_password(production_postgres_envs_path, value=None)
 
     set_celery_flower_user(local_django_envs_path, value=celery_flower_user)
-    set_celery_flower_password(
-        local_django_envs_path, value=DEBUG_VALUE if debug else None
-    )
+    set_celery_flower_password(local_django_envs_path, value=None)
     set_celery_flower_user(production_django_envs_path, value=celery_flower_user)
-    set_celery_flower_password(
-        production_django_envs_path, value=DEBUG_VALUE if debug else None
-    )
+    set_celery_flower_password(production_django_envs_path, value=None)
 
 
 def set_flags_in_settings_files():
@@ -208,28 +200,16 @@ def remove_graphql_files():
 
 
 def main():
-    debug = "{{ cookiecutter.debug }}".lower() == "y"
-
-    set_flags_in_envs(
-        DEBUG_VALUE if debug else generate_random_user(),
-        DEBUG_VALUE if debug else generate_random_user(),
-        debug=debug,
-    )
+    set_flags_in_envs(generate_random_user(), generate_random_user())
 
     set_flags_in_settings_files()
 
     append_to_gitignore_file(".env")
     append_to_gitignore_file(".envs/*")
 
-    if "{{ cookiecutter.keep_local_envs_in_vcs }}".lower() == "y":
-        append_to_gitignore_file("!.envs/.local/")
-
     if "{{ cookiecutter.use_celery }}".lower() == "n":
         remove_celery_app()
         remove_celery_compose_dirs()
-
-    if "{{ cookiecutter.use_travisci }}".lower() == "n":
-        remove_dottravisyml_file()
 
     if "{{ cookiecutter.use_graphql }}".lower() == "n":
         remove_graphql_files()

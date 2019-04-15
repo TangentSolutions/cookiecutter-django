@@ -36,11 +36,10 @@ class UserTable(django_tables2.Table):
         """Checks if the user's name is longer than 10 characters and returns html."""
 
         if len(value) > 10:
-            uri = static('feather/alert-triangle.svg')
             {% raw %}
             element = f"""
                 <div>
-                    <img src="{uri}" alt="warning">
+                    <i class="fas fa-exclamation-triangle"></i>
                 </div>
             """
             {%- endraw %}

@@ -92,11 +92,11 @@ def is_valid_cipc_registration_number(value: str) -> bool:
     if not isinstance(value, str):
         raise TypeError(f"unsupported type for value '{type(value)}'")
 
-    pattern = re.compile(r"\d{4}/\d{6}/(?P<company_type_code>\d{2})")
-    match = pattern.match(value)
-
     if len(value) != 14:
         return False
+
+    pattern = re.compile(r"\d{4}/\d{6}/(?P<company_type_code>\d{2})")
+    match = pattern.match(value)
 
     if match is None:
         return False

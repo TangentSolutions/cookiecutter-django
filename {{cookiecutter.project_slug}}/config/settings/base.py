@@ -5,6 +5,7 @@ Base settings to build other settings files upon.
 import os
 import environ
 import platform
+import datetime
 
 
 ROOT_DIR = environ.Path(__file__) - 3  # ({{ cookiecutter.project_slug }}/config/settings/base.py - 3 = {{ cookiecutter.project_slug }}/)
@@ -19,7 +20,7 @@ if READ_DOT_ENV_FILE:
 # GENERAL
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = env.bool('DJANGO_DEBUG', False)
+DEBUG = env.bool("DJANGO_DEBUG", False)
 # Local time zone. Choices are
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # though not all of them may be available with every OS.
@@ -69,12 +70,12 @@ THIRD_PARTY_APPS = [
     'crispy_forms',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
     'rest_framework',
     'django_tables2',
     'django_filters',
 {% if cookiecutter.use_sass_preprocessor == 'y' -%}
     'sass_processor',
+    'compressor',
 {% endif %}
 
 {% if cookiecutter.pdf_plugin == 'y' -%}
@@ -89,21 +90,42 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'showcase.apps.ShowcaseAppConfig',
     'accounts.apps.AccountsAppConfig',
+    'common.apps.CommonAppConfig',
     # Your stuff: custom apps go here
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        {%- if cookiecutter.use_jwt == 'y' %}
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        {% endif -%}
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "DEFAULT_FILTER_BACKENDS": (
+        "rest_framework_filters.backends.RestFrameworkFilterBackend",
+    ),
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
 }
+
+{%- if cookiecutter.use_jwt == 'y' %}
+# JWT settings
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": datetime.timedelta(hours=1),
+    "REFRESH_TOKEN_LIFETIME": datetime.timedelta(hours=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+}
+{% endif -%}
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 {% if cookiecutter.use_sass_preprocessor == 'y' -%}
 # Sass preprocessor
-SASS_PROCESSOR_INCLUDE_DIRS = [os.path.join(ROOT_DIR, 'node_modules/bootstrap')]
+SASS_PRECISION = 8
+SASS_PROCESSOR_INCLUDE_DIRS = [
+    os.path.join(ROOT_DIR, "static/sass/bootstrap"),
+]
 {%- endif %}
 
 # MIGRATIONS
@@ -167,15 +189,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
-{% if cookiecutter.use_whitenoise == 'y' -%}
-# WhiteNoise
-# ------------------------------------------------------------------------------
-# http://whitenoise.evans.io/en/latest/django.html#enable-whitenoise
-MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')  # noqa F405
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-{%- endif %}
-
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
@@ -190,7 +203,9 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    {% if cookiecutter.use_sass_preprocessor == 'y' -%}
     'sass_processor.finders.CssFinder',
+    {% endif %}
 ]
 
 # MEDIA
@@ -303,13 +318,5 @@ ACCOUNT_ADAPTER = 'accounts.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = 'accounts.adapters.SocialAccountAdapter'
 
-{% if cookiecutter.use_compressor == 'y' -%}
-# django-compressor
-# ------------------------------------------------------------------------------
-# https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
-INSTALLED_APPS += ['compressor']
-STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']
-
-{%- endif %}
 # Your stuff...
 # ------------------------------------------------------------------------------

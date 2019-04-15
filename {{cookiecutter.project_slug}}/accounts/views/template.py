@@ -15,7 +15,7 @@ class UserDetailView(LoginRequiredMixin, DetailView):
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
-    template_name = "users/user_detail.html"
+    template_name = "accounts/users/user_detail.html"
 
 
 class UserListView(LoginRequiredMixin, ListView):
@@ -24,7 +24,7 @@ class UserListView(LoginRequiredMixin, ListView):
     model = User
     slug_field = "username"
     slug_url_kwarg = "username"
-    template_name = "users/user_list.html"
+    template_name = "accounts/users/user_list.html"
 
 
 class UserUpdateView(LoginRequiredMixin, UpdateView):
@@ -33,7 +33,7 @@ class UserUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UpdateUserDetailForm
     # fields = ['first_name', 'last_name'] # For an auto generated form use fields
-    template_name = "users/user_form.html"
+    template_name = "accounts/users/user_form.html"
 
     def get_success_url(self) -> str:
         """Resolve the user-detail url for the request user.

@@ -1,6 +1,6 @@
 {
   "name": "{{cookiecutter.project_slug}}",
-  "version": "{{ cookiecutter.version }}",
+  "version": "0.1.0",
   "dependencies": {
     "lodash": "^4.17.11",
     "bootstrap": "4.1.1",

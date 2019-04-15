@@ -1,3 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
-celery -A taskapp beat -l INFO
+rm -f './celerybeat.pid'
+poetry run celery -A taskapp beat -l INFO
