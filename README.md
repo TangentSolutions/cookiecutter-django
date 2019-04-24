@@ -14,15 +14,16 @@ $ python -m venv env
 $ source env/bin/activate
 
 $ pip install --upgrade pip
-$ pip install cookiecutter bumpversion
+$ pip install cookiecutter
 $ cookiecutter https://github.com/TangentSolutions/cookiecutter-django
 ```
 
 After generating the project `cd into the folder` and run the following.
 
 ```bash
-$ ./install-demo.sh
-$ ./initialize-demo.sh
+$ npm install
+$ python copy_clientside_libraries.py
+$ docker-compose -f local.yml up --build
 ```
 
 # First steps
@@ -30,18 +31,6 @@ $ ./initialize-demo.sh
 The project includes a small demo of the libraries it bundles. Once running open your browser on [localhost:8000](http://localhost:8000) and create an account. The mail hog server can be accessed on [localhost:8025](http://localhost:8025/) when you need to retrieve the confirmation email.
 
 # Included libraries
-
-## web-pdb
-
-Web pdb is included and can be used as follows (Note the port is important in the example below as this port is exposed by the local docker container).
-
-```python
-import web_pdb
-
-web_pdb.set_trace(port=1986)
-```
-
-Within the local environment `PYTHONBREAKPOINT="web_pdb.set_trace"` is set. Therefore in Python 3.7 and up the debugger can be activated by calling `breakpoint()`.
 
 ## django_tables2 & django_filters
 
@@ -65,21 +54,3 @@ class UserTable(django_tables2.Table):
 
 1. libcairo2 is required by weasyprint for pdf generation and is installed during the docker build. Currently the version of cairo installed triggers a user warning
 related to svg images for versions < 1.15.4. At this time a newer version is not available to install via apt-get and would require downloading the source (+- 100mb) and building it. This has not been done since pdf generation is working correctly in spite of the user warning.
-
-## To Do:
-
-- [ ] Add django channels support
-	- [ ] Investigate using a reverse proxy within container
-- [x] Add GraphQL support
-	- [ ] Integrate with DRF permissioning
-- [ ] startapp template
-	- [ ] Create startapp templates that reflect choices made by user i.e. include graphql
-	- [ ] Include test suite structure
-- [ ] Restructure project structure to standard django structure
-- [ ] Tests
-- [ ] Install cairo for weasy print
-- [x] Specify port in docker compose
-- [x] Use python 3.6.7
-- [ ] Update gitignore in post hook
-- [x] Update bumpversion config
-- [ ] Tests run on sqlite

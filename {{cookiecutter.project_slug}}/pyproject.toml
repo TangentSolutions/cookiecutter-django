@@ -6,7 +6,6 @@ authors = ["{{cookiecutter.author_name}} <{{cookiecutter.email}}>"]
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.python_version}}"
-python = "^3.7"
 {%- if cookiecutter.use_jwt == 'y' %}
 djangorestframework_simplejwt = "^4.1"
 {%- endif %}
