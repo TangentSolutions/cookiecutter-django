@@ -1,4 +1,14 @@
 #!/bin/bash
 
-poetry run /app/manage.py collectstatic --noinput
-poetry run gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app
+until nc -z ${POSTGRES_HOST} ${POSTGRES_PORT}; do
+    echo "$(date) - waiting for postgres..."
+    sleep 1
+done
+
+until nc -z ${REDIS_HOST} 6379; do
+    echo "$(date) - waiting for redis..."
+    sleep 1
+done
+
+python /app/manage.py collectstatic --noinput
+gunicorn config.wsgi --bind 0.0.0.0:5000 --chdir=/app

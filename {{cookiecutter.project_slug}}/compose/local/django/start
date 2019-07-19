@@ -1,4 +1,14 @@
 #!/bin/bash
 
-poetry run ./manage.py migrate
-poetry run ./manage.py runserver 0.0.0.0:{{cookiecutter.development_port}}
+until nc -z ${POSTGRES_HOST} ${POSTGRES_PORT}; do
+    echo "$(date) - waiting for postgres..."
+    sleep 1
+done
+
+until nc -z ${REDIS_HOST} 6379; do
+    echo "$(date) - waiting for redis..."
+    sleep 1
+done
+
+python manage.py migrate
+python manage.py runserver 0.0.0.0:{{cookiecutter.development_port}}
