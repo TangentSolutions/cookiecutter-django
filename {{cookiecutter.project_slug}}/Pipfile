@@ -1,0 +1,58 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+{%- if cookiecutter.use_jwt == 'y' %}
+djangorestframework_simplejwt = "*"
+{%- endif %}
+djangorestframework-filters = "==1.0.0.dev0"
+djangorestframework = "*"
+django-cors-headers = "*"
+graphene-django = "*"
+django = "*"
+django-environ = "*"
+django-allauth = "*"
+django-crispy-forms = "*"
+{%- if cookiecutter.use_sass_preprocessor == 'y' %}
+django-compressor = "*"
+libsass = "*"
+django-sass-processor = "*"
+{%- endif %}
+django-redis = "*"
+django-filter = "*"
+django-tables2 = "*"
+{%- if cookiecutter.pdf_plugin == 'y' %}
+tablib = "*"
+django-weasyprint = "*"
+{%- endif %}
+{%- if cookiecutter.use_channels == 'y' %}
+channels = "*"
+channels_redis = "*"
+{%- endif %}
+Pillow = "*"
+argon2-cffi = "*"
+{%- if cookiecutter.use_celery == "y" %}
+celery = "*"
+flower = "*"
+{%- endif %}
+psycopg2 = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-sugar = "*"
+freezegun = "*"
+factory-boy = "*"
+django-extensions = "*"
+pytest-django = "*"
+django_coverage_plugin = "*"
+jupyter = "*"
+black = "*"
+
+[requires]
+python_version = "3.7"
+
+[pipenv]
+allow_prereleases = true
