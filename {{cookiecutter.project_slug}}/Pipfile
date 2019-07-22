@@ -10,7 +10,9 @@ djangorestframework_simplejwt = "*"
 djangorestframework-filters = "==1.0.0.dev0"
 djangorestframework = "*"
 django-cors-headers = "*"
+{%- if cookiecutter.use_graphql == 'y' %}
 graphene-django = "*"
+{%- endif %}
 django = "*"
 django-environ = "*"
 django-allauth = "*"
