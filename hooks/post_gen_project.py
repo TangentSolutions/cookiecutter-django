@@ -186,17 +186,18 @@ def remove_git_hooks_directory():
     shutil.rmtree(os.path.join("Git-Hooks"))
 
 
-def remove_copy_bootstrap_file():
-    """Remove the package.json file."""
-
-    os.remove("copy_bootstrap.py")
-
-
 def remove_graphql_files():
-    """Remove the package.json file."""
+    """Remove the graphql file."""
 
     path = os.path.join("accounts", "schema.py")
     os.remove(path)
+
+
+def remove_channels_files():
+    """Remove the package.json file."""
+
+    os.remove(os.path.join("config", "asgi.py"))
+    os.remove(os.path.join("config", "routing.py"))
 
 
 def main():
@@ -213,6 +214,9 @@ def main():
 
     if "{{ cookiecutter.use_graphql }}".lower() == "n":
         remove_graphql_files()
+
+    if "{{ cookiecutter.use_channels }}".lower() == "n":
+        remove_channels_files()
 
     add_black_formatter_git_hook()
     apply_initial_black_formatting()
