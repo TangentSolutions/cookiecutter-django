@@ -42,7 +42,7 @@ services:
       - "8025:8025"
 
   redis:
-    image: redis:3.2
+    image: redis:5
 
   {% if cookiecutter.use_celery == 'y' %}
   celeryworker:
