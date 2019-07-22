@@ -2,6 +2,10 @@ build:
 	@docker-compose -f local.yml build --build-arg BUILD=DEV
 	@npm install
 	@python ./copy_clientside_libraries.py
+	@rm -rf node_modules
+
+up:
+	@docker-compose -f local.yml up
 
 dup:
 	@docker-compose -f local.yml up -d
@@ -22,7 +26,7 @@ migrate:
 	@docker-compose -f local.yml run --rm django ./manage.py migrate
 
 logs:
-	@docker-compose -f local.yml logs -tf django
+	@docker-compose -f local.yml logs -tf $(service)
 
 shell:
 	@docker-compose -f local.yml run --rm django ./manage.py shell

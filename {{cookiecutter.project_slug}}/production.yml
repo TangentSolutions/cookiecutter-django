@@ -11,6 +11,7 @@ services:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
     image: {{ cookiecutter.project_slug }}_production_django
+    container_name: django
     depends_on:
       - postgres
       - redis
@@ -51,17 +52,20 @@ services:
 
   celeryworker:
     <<: *django
-    image: {{ cookiecutter.project_slug }}_production_celeryworker
+    image: {{ cookiecutter.project_slug }}_production_celery_worker
+    container_name: celery_worker
     command: /start-celeryworker
 
   celerybeat:
     <<: *django
-    image: {{ cookiecutter.project_slug }}_production_celerybeat
+    image: {{ cookiecutter.project_slug }}_production_celery_bear
+    container_name: celery_beat
     command: /start-celerybeat
 
   flower:
     <<: *django
     image: {{ cookiecutter.project_slug }}_production_flower
+    container_name: flower
     ports:
       - "5555:5555"
     command: /start-flower
