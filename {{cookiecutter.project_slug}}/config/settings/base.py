@@ -78,6 +78,7 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'rest_framework',
+    'corsheaders',
     'django_tables2',
     'django_filters',
 {% if cookiecutter.use_sass_preprocessor == 'y' -%}
