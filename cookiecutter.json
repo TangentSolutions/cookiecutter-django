@@ -4,13 +4,12 @@
   "author_name": "Tangent Solutions",
   "domain_name": "example.com",
   "email": "{{ cookiecutter.author_name.lower()|replace(' ', '.') }}@example.com",
-  "python_version": ["3.7", "3.6"],
   "development_port": "8000",
   "timezone": ["Africa/Johannesburg", "UTC"],
-  "pdf_plugin": "y",
+  "pdf_plugin": "n",
   "use_graphql": "n",
   "use_channels": "n",
-  "use_sass_preprocessor": "y",
+  "use_sass_preprocessor": "n",
   "use_celery": "n",
   "use_jwt": "n"
 }

@@ -10,6 +10,7 @@ services:
       context: .
       dockerfile: ./compose/local/django/Dockerfile
     image: {{ cookiecutter.project_slug }}_local_django
+    container_name: django
     depends_on:
       - postgres
       - mailhog
@@ -46,7 +47,8 @@ services:
 
   celeryworker:
     <<: *django
-    image: {{ cookiecutter.project_slug }}_local_celeryworker
+    image: {{ cookiecutter.project_slug }}_local_django
+    container_name: celery_worker
     depends_on:
       - redis
       - postgres
@@ -56,7 +58,8 @@ services:
 
   celerybeat:
     <<: *django
-    image: {{ cookiecutter.project_slug }}_local_celerybeat
+    image: {{ cookiecutter.project_slug }}_local_django
+    container_name: celery_beat
     depends_on:
       - redis
       - postgres
@@ -66,7 +69,8 @@ services:
 
   flower:
     <<: *django
-    image: {{ cookiecutter.project_slug }}_local_flower
+    image: {{ cookiecutter.project_slug }}_local_django
+    container_name: flower
     ports:
       - "5555:5555"
     command: /start-flower

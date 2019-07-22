@@ -1,31 +1,16 @@
-
-{%- if cookiecutter.python_version == "3.6" %}
-FROM python:3.6
-{% elif cookiecutter.python_version == "3.7" %}
 FROM python:3.7
-{% endif -%}
 
 # Setup environment
 ENV PYTHONUNBUFFERED 1
 ENV PYTHONDONTWRITEBYTECODE 1
 ARG BUILD
 
-RUN apt-get update
-
-RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
-RUN apt-get install -y netcat
-
-# Install libcairo if pdf exports are required
-{%- if cookiecutter.pdf_plugin == "y" %}
-RUN apt-get -y install libcairo2 libpango-1.0-0 \
-	libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
-	libffi-dev shared-mime-info
-{% endif %}
-
-# Install libsass-dev
-{%- if cookiecutter.use_sass_preprocessor == 'y' %}
-RUN apt-get -y install libsass-dev
-{% endif %}
+RUN apt-get update && apt-get install -y netcat{%- if cookiecutter.pdf_plugin == "y" %} \
+    libcairo2 libpango-1.0-0 \
+    libpangocairo-1.0-0 libgdk-pixbuf2.0-0 \
+    libffi-dev shared-mime-info{% endif %}{% if cookiecutter.use_sass_preprocessor == 'y' %} \
+	libsass-dev
+{%- endif %}
 
 RUN groupadd django
 RUN useradd django -g django

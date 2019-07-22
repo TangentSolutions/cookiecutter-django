@@ -327,3 +327,4 @@ SOCIALACCOUNT_ADAPTER = 'accounts.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+DJANGO_TABLES2_TEMPLATE = "django_tables2/bootstrap-responsive.html"
