@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y netcat{%- if cookiecutter.pdf_plugin ==
 {%- endif %}
 
 # Install python dependencies here so that they are cached
-COPY ./Pipfile /Pipfile
+COPY ./Pipfile* /
 COPY ./install.sh /install.sh
 RUN sed -i 's/\r//' /install.sh
 RUN chmod +x /install.sh

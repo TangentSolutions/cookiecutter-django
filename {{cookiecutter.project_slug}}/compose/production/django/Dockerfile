@@ -16,7 +16,7 @@ RUN groupadd django
 RUN useradd django -g django
 
 # Install python dependencies here so that they are cached
-COPY ./Pipfile /Pipfile
+COPY ./Pipfile* /
 COPY ./install.sh /install.sh
 RUN sed -i 's/\r//' /install.sh
 RUN chmod +x /install.sh

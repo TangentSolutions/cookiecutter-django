@@ -1,7 +1,11 @@
 #! /bin/bash
 
 pip install --upgrade pip pipenv
-pipenv lock
+
+if [ ! -f Pipfile.lock ]; then
+    echo "Pipfile.lock not found! Creating one."
+    pipenv lock
+fi
 
 if [ "$BUILD" == "DEV" ];
     then
