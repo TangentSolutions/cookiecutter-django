@@ -1,6 +1,4 @@
-from django.urls import reverse
 from django.utils.html import format_html
-from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.contrib.auth import get_user_model
 from django_tables2 import columns
 
