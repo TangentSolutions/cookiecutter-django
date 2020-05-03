@@ -23,7 +23,7 @@ After generating the project `cd into the folder` and run the following.
 ```bash
 $ npm install
 $ python copy_clientside_libraries.py
-$ docker-compose -f local.yml up --build
+$ make build
 ```
 
 # First steps
